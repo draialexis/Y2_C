@@ -20,6 +20,10 @@ int fib(int n) {
 
 int *createFibArr(int n) {
     int *arr = malloc(sizeof(int) * n);
+    if (arr == NULL) {
+        printf("malloc failed\n");
+        return NULL;
+    }
     int *arrStart = arr;
     int i;
     for (i = 0; i < n; i++) {
