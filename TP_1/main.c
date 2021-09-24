@@ -102,10 +102,14 @@ int main() {
     printf("\nEX#7\n");
     //error in instructions: example shows a string with 9 chars and an array with 8 ints
 
-    char *T = "abcd";  //12 chars, maybe make this more dynamic later
-    int arr7[4] = {2, 0, 3, 1};
-    permuteString(T, arr7);
-    free(T);
-
+    char *T = malloc(sizeof(char) * N);
+    if (T != NULL) {
+        sprintf(T, "qwertyuiopas");//hardcoding this is a bad idea
+        int *arr7 = createRdmPerm(N);
+        //(!) array and string need to be same size. Crash if array is smaller..?
+        printf("%s\n", T);
+        printf("%s", permuteString(T, arr7));
+        free(T);
+    }
     return 0;
 }

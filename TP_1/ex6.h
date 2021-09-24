@@ -25,7 +25,7 @@ int *createRdmPerm(int n) {
 
     int tmp;
     int j = 0;
-    for (i = 0; i < n / 2; i++) { // doesn't need to be "n", just like you don't need to move 54 cards to shuffle a pack
+    for (i = 0; i < n; i++) { // could actually be < n, just like you don't need to move 54 cards to shuffle a pack
         while (j == i) {
             j = rand() % n; //would inevitably shuffle even a size-2 array... or would it?
         }
@@ -38,7 +38,7 @@ int *createRdmPerm(int n) {
     arr = arrStart;
 
     AfficheTab(arr, n);
-    printf("array is a permutation: %s\n", isPermutation(arr, N) ? "true" : "false");
+    printf("array is a permutation: %s\n", isPermutation(arr, n) ? "true" : "false");
 
     return arr;
 }
