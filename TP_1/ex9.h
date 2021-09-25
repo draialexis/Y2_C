@@ -10,8 +10,8 @@ void fillMat2d(float *mat, int rows, int cols) {
     float x;
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
-            printf("> ");
-            scanf("%f", x);
+            printf(">");
+            scanf("%f", &x);
             *(mat + (i * rows) + j) = x;
         }
     }
@@ -20,7 +20,7 @@ void fillMat2d(float *mat, int rows, int cols) {
 void showMat2d(const float *matrix, int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            printf("%+04f ", *(matrix + (i * rows) + j));
+            printf("%+02.2f ", *(matrix + (i * rows) + j));
         }
         printf("\n");
     }
