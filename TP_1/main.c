@@ -39,18 +39,21 @@ int main() {
     ////
     printf("\nEX#3\n");
 
-    variable("ivLVIl");
+    variable("ivLVIlGg");
     /*
      * i: int
      * I: int pointer
      * v: void
      * V: void pointer
-     * l: long
-     * L: long pointer
+     * l: long int
+     * L: long int pointer
+     * g: long long int
+     * G: long long int pointer
      */
 
     //https://www.tutorialspoint.com/cprogramming/c_data_types.htm
-    //Why do my longs take only 4 bytes..? I do have a 64bit OS... Is my compiler based on a 32bit OS?
+    //Why do my longs take only 4 bytes..? I do have a 64bit OS... Is my IDE compiler based on a 32bit OS?
+    //My local Ubuntu does say 8 bytes... huh
 
     ////
     printf("\nEX#4\n");
@@ -108,7 +111,7 @@ int main() {
         int *arr7 = createRdmPerm(N);
         //(!) array and string need to be same size. Crash if array is smaller..?
         printf("%s\n", T);
-        printf("%s", permuteString(T, arr7));
+        printf("%s\n", permuteString(T, arr7));
         free(T);
     }
     return 0;

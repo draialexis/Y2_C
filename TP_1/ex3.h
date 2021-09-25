@@ -2,6 +2,11 @@
 // Created by draia on 23/09/2021.
 //
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wformat"
+
+// conflicts between: MinGW on Windows, and expected formats for a C program
+// compiled and executed on a Unix OS
 #ifndef TP1_PA_EX3_H
 #define TP1_PA_EX3_H
 
@@ -10,22 +15,28 @@ void variable(const char *types) {
     while (*types != '\0') {
         switch (*types) {
             case 'i':
-                printf("arg[%d]: int | size: %llu\n", i, sizeof(int));
+                printf("arg[%d]: int | size: %lu\n", i, sizeof(int));
                 break;
             case 'I':
-                printf("arg[%d]: int pointer | size: %llu\n", i, sizeof(int *));
+                printf("arg[%d]: int pointer | size: %lu\n", i, sizeof(int *));
                 break;
             case 'v':
-                printf("arg[%d]: void | size: %llu\n", i, sizeof(void));
+                printf("arg[%d]: void | size: %lu\n", i, sizeof(void));
                 break;
             case 'V':
-                printf("arg[%d]: void pointer | size: %llu\n", i, sizeof(void *));
+                printf("arg[%d]: void pointer | size: %lu\n", i, sizeof(void *));
                 break;
             case 'l':
-                printf("arg[%d]: long int | size: %llu\n", i, sizeof(long));
+                printf("arg[%d]: long int | size: %lu\n", i, sizeof(long int));
                 break;
             case 'L':
-                printf("arg[%d]: long int pointer | size: %llu\n", i, sizeof(long *));
+                printf("arg[%d]: long int pointer | size: %lu\n", i, sizeof(long int *));
+                break;
+            case 'g':
+                printf("arg[%d]: long long int | size: %lu\n", i, sizeof(long long int));
+                break;
+            case 'G':
+                printf("arg[%d]: long long int pointer | size: %lu\n", i, sizeof(long long int *));
                 break;
         }
         i++;
@@ -34,3 +45,4 @@ void variable(const char *types) {
 }
 
 #endif //TP1_PA_EX3_H
+#pragma clang diagnostic pop
