@@ -8,7 +8,8 @@
 int *createRdmPerm(int n) {
     int *arr = malloc(sizeof(int) * n);
     if (arr == NULL) {
-        printf("malloc failed\n");
+        printf("!_malloc failed_!\n");
+        DEBUG
         return NULL;
     }
     int *arrStart = arr;

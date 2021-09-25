@@ -4,6 +4,7 @@
 #include <string.h>
 
 #define N 12
+#define DEBUG printf("file %s; line %d", __FILE__, __LINE__);
 
 #include "ex1.h"
 #include "ex2.h"
@@ -11,12 +12,14 @@
 #include "ex5.h"
 #include "ex6.h"
 #include "ex7.h"
+#include "ex8.h"
+#include "ex9.h"
 
 int main() {
 
     srand(time(NULL));
 
-    printf("TP#1: initiated\n");
+    printf("TP_1: initiated\n");
     ////
     printf("\nEX#1\n");
 
@@ -114,5 +117,12 @@ int main() {
         printf("%s\n", permuteString(T, arr7));
         free(T);
     }
+
+    ////
+    printf("\nEX#8 & 9\n");
+    float *mat1 = createMat2d(2, 3);
+    fillMat2d(mat1, 2, 3);
+    showMat2d(mat1, 2, 3);
+
     return 0;
 }
