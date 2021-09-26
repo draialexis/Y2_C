@@ -8,7 +8,8 @@
 #define GET_INPUT  printf("row: %d | col: %d | >", i + 1, j + 1); fgets(input, 15, stdin); x = strtof(input, &endptr); printf("%f\n", x);
 
 void fillMat2d(float *mat, int rows, int cols) {
-    printf("Please select floats as coefficients for this matrix (rows = %d, columns = %d)\n", rows, cols);
+    printf("Please select floats as coefficients for this matrix (rows = %d, columns = %d)\n"
+           "_(!)_(Please use '.' instead of ',' with floats, or they WILL be trunked)\n", rows, cols);
     float x;
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
@@ -16,7 +17,7 @@ void fillMat2d(float *mat, int rows, int cols) {
 
             GET_INPUT
 
-            while (x == 0 && endptr == input) {
+            while (x == 0 && endptr == input) { //input and endptr are the same if the input is invalid
                 GET_INPUT
             }
 
