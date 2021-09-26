@@ -10,7 +10,7 @@ char *permuteString(char *str, const int *arr) {
     if (res == NULL) {
         printf("!_malloc failed_!\n");
         DEBUG
-        return NULL;
+        exit(EXIT_FAILURE);
     }
 
     for (int i = 0; i < strlen(str); ++i) {

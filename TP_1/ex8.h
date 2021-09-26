@@ -10,7 +10,7 @@ float *createMat2d(int rows, int cols) {
     if (mat == NULL) {
         printf("!_malloc failed_!\n");
         DEBUG
-        return NULL;
+        exit(EXIT_FAILURE);
     }
     return mat;
 }

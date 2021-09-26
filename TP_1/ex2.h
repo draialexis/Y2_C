@@ -23,7 +23,7 @@ int *createFibArr(int n) {
     if (arr == NULL) {
         printf("!_malloc failed_!\n");
         DEBUG
-        return NULL;
+        exit(EXIT_FAILURE);
     }
     int *arrStart = arr;
     int i;
