@@ -32,6 +32,8 @@ int *createRdmPerm(int n) {
         }
         tmp = arr[j]; //is there a way to do that with pointers? what are the trade-offs?
         arr[j] = arr[i];
+//        printf("shuffling...arr[%d] <-> arr[%d]\n", i, j);
+        //srand is great... at producing the same number eight times in a row
         arr[i] = tmp;
     }
     printf("after: ");
