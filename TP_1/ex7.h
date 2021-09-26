@@ -8,9 +8,7 @@
 char *permuteString(char *str, const int *arr) {
     char *res = malloc(sizeof(char) * strlen(str));
     if (res == NULL) {
-        printf("!_malloc failed_!\n");
-        DEBUG
-        exit(EXIT_FAILURE);
+        MALLOC_FAIL
     }
 
     for (int i = 0; i < strlen(str); ++i) {

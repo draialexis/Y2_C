@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <errno.h>
 
 #define N 12
 #define DEBUG printf("file %s; line %d", __FILE__, __LINE__);
+#define MALLOC_FAIL printf("!_malloc failed_!\n"); DEBUG; exit(EXIT_FAILURE);
 
 #include "ex1.h"
 #include "ex2.h"
@@ -67,6 +69,8 @@ int main() {
         AfficheTab(X, 10);
         AfficheTab((int *) ((char *) X + 8), 8);
         free(X);
+    } else {
+        MALLOC_FAIL
     }
     //"X+8" shifts the pointer by 2 spaces to the right (shouldn't it be 1, since pointers have size 8?)
     //the cast to a "char *" may be successful
@@ -116,11 +120,13 @@ int main() {
         printf("%s\n", T);
         printf("%s\n", permuteString(T, arr7));
         free(T);
+    } else {
+        MALLOC_FAIL
     }
 
     ////
     printf("\nEX#8 & 9\n");
-    float *mat1 = createMat2d(2, 3);
+    float **mat1 = createMat2d(2, 3);
     fillMat2d(mat1, 2, 3);
     showMat2d(mat1, 2, 3);
 
