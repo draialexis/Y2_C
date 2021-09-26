@@ -14,10 +14,11 @@ void fillMat2d(float *mat, int rows, int cols) {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             char input[16]; char *endptr;//arbitrarily decide how many chars can be used to make any x, for now
-
+            errno = 0;
             GET_INPUT
 
-            while (x == 0 && endptr == input) { //input and endptr are the same if the input is invalid
+            while (x == 0 && (errno != 0 || endptr == input)) { //input and endptr are the same if the input is invalid
+                //except maybe not always, but errno may be set to EINVAL then -- so check for that too
                 GET_INPUT
             }
 
