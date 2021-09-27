@@ -11,8 +11,8 @@ void fillMat2d(float **mat, int rows, int cols) {
     printf("Please select floats as coefficients for this matrix (rows = %d, columns = %d)\n"
            "_(!)_(Please use '.' instead of ',' with floats, or they WILL be trunked)\n", rows, cols);
     float x;
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
             char input[16];
             char *endptr;//arbitrarily decide how many chars can be used to make any x, for now
             errno = 0;

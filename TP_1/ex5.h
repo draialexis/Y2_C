@@ -12,7 +12,7 @@ int isPermutation(const int *arr, int n) {
     }
 
     int count = 0;
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         if (i > 0) {
             if (count != 1) {
                 printf("element: %d wasn't found\n", i - 1);
@@ -21,7 +21,7 @@ int isPermutation(const int *arr, int n) {
         }
         count = 0;
 
-        for (int j = 0; j < n; ++j) {
+        for (int j = 0; j < n; j++) {
             if (arr[j] >= n || arr[j] < 0) {
                 printf("element: %d out of bounds\n", arr[j]);
                 return 0;

@@ -5,7 +5,7 @@
 #include <errno.h>
 
 #define N 12
-#define DEBUG printf("file %s; line %d", __FILE__, __LINE__);
+#define DEBUG printf("file %s; line %d\n", __FILE__, __LINE__);
 #define MALLOC_FAIL printf("!_malloc failed_!\n"); DEBUG; exit(EXIT_FAILURE);
 
 #include "ex1.h"
@@ -134,8 +134,8 @@ int main() {
 
     ////
     printf("\nEX#10\n");
-	rotateRightMat(mat1, 2, 3);
-	showMat2d(mat1, 3, 2);
+	float **mat2 = rotateRightMat(mat1, 2, 3);
+	showMat2d(mat2, 3, 2);
 	
 	
     return 0;

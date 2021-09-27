@@ -12,7 +12,7 @@ float **createMat2d(int rows, int cols) {
     if (mat == NULL) {
         MALLOC_FAIL
     }
-    for (int i = 0; i < rows; ++i) {
+    for (int i = 0; i < rows; i++) {
 
         mat[i] = malloc(cols * sizeof(float));
 

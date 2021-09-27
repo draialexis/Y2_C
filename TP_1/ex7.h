@@ -13,7 +13,7 @@ char *permuteString(const char *str, const int *arr) {
 		
 	sprintf(res, "%s", str); //initializing the string 
 	
-    for (int i = 0; i < strlen(str); ++i) {
+    for (int i = 0; i < strlen(str); i++) {
 		res[arr[i]] = str[i];
         printf("res[%d] = %c / str[%d] = %c\n", arr[i], res[arr[i]], i, str[i]);
     }
