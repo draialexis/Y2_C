@@ -16,6 +16,8 @@
 #include "ex7.h"
 #include "ex8.h"
 #include "ex9.h"
+#include "ex10.h"
+#include "ex11.h"
 
 int main() {
 
@@ -112,14 +114,14 @@ int main() {
     printf("\nEX#7\n");
     //error in instructions: example shows a string with 9 chars and an array with 8 ints
 
-    char *T = malloc(sizeof(char) * N);
-    if (T != NULL) {
-        sprintf(T, "qwertyuiopas");//hardcoding this is a bad idea
+    char *str = malloc(sizeof(char) * 13); 
+    if (str != NULL) {
+        sprintf(str, "qwertyuiopas");//hardcoding this is probably a bad idea
         int *arr7 = createRdmPerm(N);
-        //(!) array and string need to be same size. Crash if array is smaller..?
-        printf("%s\n", T);
-        printf("%s\n", permuteString(T, arr7));
-        free(T);
+        //(!) array and string need to be same size. Crash or bug if array is smaller..?
+        printf("%s\n", str);
+        printf("%s\n", permuteString(str, arr7));
+        free(str);
     } else {
         MALLOC_FAIL
     }
@@ -130,5 +132,11 @@ int main() {
     fillMat2d(mat1, 2, 3);
     showMat2d(mat1, 2, 3);
 
+    ////
+    printf("\nEX#10\n");
+	rotateRightMat(mat1, 2, 3);
+	showMat2d(mat1, 3, 2);
+	
+	
     return 0;
 }
