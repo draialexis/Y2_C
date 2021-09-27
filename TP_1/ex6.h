@@ -12,8 +12,7 @@ int * createRdmPerm(int n) {
     int * arr = malloc(sizeof(int) * n); // we have the size of the array as a parameter, not a constant. Perfect for malloc
 
     if (arr == NULL) { // this is just in case the memory allocation fails. If that happens, we have to get out
-        printf("yikes!\n");
-        return NULL;
+        MALLOC_FAIL
     }
 
     int * arrStart = arr;
