@@ -15,7 +15,7 @@ float ** rotateRightMat(float **mat, int mrows, int mcols) { //we use the rows o
         MALLOC_FAIL
     }
     for (int i = 0; i < rows; i++) {
-        res[i] = malloc(cols * sizeof(float)); 
+        res[i] = malloc(sizeof(float) * cols); 
         if (res[i] == NULL) {
             MALLOC_FAIL
         }
@@ -24,24 +24,34 @@ float ** rotateRightMat(float **mat, int mrows, int mcols) { //we use the rows o
 		}
     }
 	// at this point, a mat(3, 2) should have given us a res(2,3)
-	/*
-	for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("%+.2f ", *(*(res + i) + j));
-        }
-        printf("\n");
-    }
-	*/
+
 	
 	
 	//TODO https://www.geeksforgeeks.org/rotate-matrix-right-k-times/
 	
-	for (int i = 0; i < rows; i++) {//3
-        for (int j = 0; j < cols; j++) {//2
+	for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
 			//*(*(res + i) + j) = *(*(mat + j) + i);
 			res[i][j] = mat[j][i];
 			//printf("i=%d, j=%d, res[i][j]=%.2f, mat[j][i]=%.2f\n", i, j, res[i][j], mat[j][i]);
 		}
+    }
+	//copy lines of res into an aux, but backwards
+	//then replace that line of res by aux
+	//then free aux
+	for (int i = 0; i < rows; i++) {
+		float * aux = malloc(sizeof(float) * cols);
+			if(aux==NULL){
+				MALLOC_FAIL
+			}
+        for (int j = cols - 1; j >= 0; j--) { //going backwards
+				aux[cols - 1 - j] = res[i][j];
+			}
+		for (int j = 0; j < cols; j++){
+			//replace
+			res[i][j] = aux[j];
+		}//free
+		free(aux);
     }
     return res;
 }

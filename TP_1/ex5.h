@@ -12,13 +12,15 @@ int isPermutation(const int *arr, int n) {
     }
 
     int count = 0;
-    for (int i = 0; i < n; i++) {
+    
+	for (int i = 0; i < n; i++) {
         if (i > 0) {
             if (count != 1) {
                 printf("element: %d wasn't found\n", i - 1);
                 return 0;
             }
         }
+		
         count = 0;
 
         for (int j = 0; j < n; j++) {

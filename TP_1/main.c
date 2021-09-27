@@ -86,7 +86,7 @@ int main() {
 
     int arr3[N] = {1, 3, 5, 6, 8, 2, 4, 7, 0, 10, 11, 9}; // isPermutation = 1
     int arr4[N] = {1, 3, 1, 6, 8, 2, 4, 7, 0, 10, 11, 9}; // isPermutation = 0 (double 1)
-    int arr5[N] = {1, 9, 5, 6, 8, 2, 4, 7, 0, 10, 11, 9}; // isPermutation = 0 (missing 0)
+    int arr5[N] = {1, 9, 5, 6, 8, 2, 4, 7, 0, 10, 11, 9}; // isPermutation = 0 (missing 3)
     int arr6[N] = {86741, 56416, 41, 684, 6841, 68, 4, 6, 84, 684, 6, 6874}; // isPermutation = 0 (out of bounds)
     printf("\narr3: ");
     AfficheTab(arr3, N);
@@ -128,14 +128,14 @@ int main() {
 
     ////
     printf("\nEX#8 & 9\n");
-    float **mat1 = createMat2d(2, 3);
-    fillMat2d(mat1, 2, 3);
-    showMat2d(mat1, 2, 3);
+    float **mat1 = createMat(2, 3);
+    fillMat(mat1, 2, 3);
+    showMat(mat1, 2, 3);
 
     ////
     printf("\nEX#10\n");
 	float **mat2 = rotateRightMat(mat1, 2, 3);
-	showMat2d(mat2, 3, 2);
+	showMat(mat2, 3, 2);
 	
 	
     return 0;
