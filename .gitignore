@@ -56,3 +56,4 @@ dkms.conf
 
 # MinGW CMake
 cmake-build-release-mingw/
+cmake-build-debug-wsl/
