@@ -21,6 +21,7 @@
 #include "tp1ex9.h"
 #include "tp1ex10.h"
 #include "tp1ex11.h"
+#include "tp1ex12.h"
 
 int main() {
 

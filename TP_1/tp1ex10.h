@@ -11,7 +11,7 @@ float **rotateRightMat(float **mat, int mrows, int mcols) {
         int cols = mrows;
         int rows = mcols;
         float **res = malloc(sizeof(float *) * rows);
-        int counter = 1;
+        float counter = 1;
 
         if (res == NULL) {
             MALLOC_FAIL
@@ -22,7 +22,7 @@ float **rotateRightMat(float **mat, int mrows, int mcols) {
                 MALLOC_FAIL
             }
             for (int j = 0; j < cols; j++) {
-                res[i][j] = counter++;
+                res[i][j] = counter++; What? Why?
             }
         }
         // at this point, a mat(3, 2) should have given us a res(2,3)
