@@ -2,8 +2,8 @@
 // Created by draia on 23/09/2021.
 //
 
-#ifndef Y2_C_EX1_H
-#define Y2_C_EX1_H
+#ifndef Y2_C_TP1EX1_H
+#define Y2_C_TP1EX1_H
 
 void AfficheTab(int *arr, int n) {
     if (arr == NULL) {
@@ -21,4 +21,4 @@ void AfficheTab(int *arr, int n) {
     }
 }
 
-#endif //Y2_C_EX1_H
+#endif //Y2_C_TP1EX1_H

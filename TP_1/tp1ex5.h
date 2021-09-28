@@ -2,8 +2,8 @@
 // Created by draia on 23/09/2021.
 //
 
-#ifndef Y2_C_EX5_H
-#define Y2_C_EX5_H
+#ifndef Y2_C_TP1EX5_H
+#define Y2_C_TP1EX5_H
 
 int isPermutation(const int *arr, int n) {
     if (arr == NULL) { //make sure that the pointer does point to an address, exit otherwise
@@ -53,4 +53,4 @@ int isPermutation(const int *arr, int n) {
     return 1;
 }
 
-#endif //Y2_C_EX5_H
+#endif //Y2_C_TP1EX5_H

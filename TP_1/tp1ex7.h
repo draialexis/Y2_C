@@ -2,8 +2,8 @@
 // Created by draia on 23/09/2021.
 //
 
-#ifndef Y2_C_EX7_H
-#define Y2_C_EX7_H
+#ifndef Y2_C_TP1EX7_H
+#define Y2_C_TP1EX7_H
 
 char *permuteString(char *str, int *arr) {
     char *res = malloc(sizeof(char) * strlen(str));
@@ -20,4 +20,4 @@ char *permuteString(char *str, int *arr) {
     return res;
 }
 
-#endif //Y2_C_EX7_H
+#endif //Y2_C_TP1EX7_H

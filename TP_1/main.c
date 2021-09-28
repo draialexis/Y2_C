@@ -8,16 +8,16 @@
 #define DEBUG printf("file %s; line %d\n", __FILE__, __LINE__);
 #define MALLOC_FAIL printf("!_malloc failed_!\n"); DEBUG; exit(EXIT_FAILURE);
 
-#include "ex1.h"
-#include "ex2.h"
-#include "ex3.h"
-#include "ex5.h"
-#include "ex6.h"
-#include "ex7.h"
-#include "ex8.h"
-#include "ex9.h"
-#include "ex10.h"
-#include "ex11.h"
+#include "tp1ex1.h"
+#include "tp1ex2.h"
+#include "tp1ex3.h"
+#include "tp1ex5.h"
+#include "tp1ex6.h"
+#include "tp1ex7.h"
+#include "tp1ex8.h"
+#include "tp1ex9.h"
+#include "tp1ex10.h"
+#include "tp1ex11.h"
 
 int main() {
 

@@ -2,8 +2,8 @@
 // Created by draia on 27/09/2021.
 //
 
-#ifndef Y2_C_EX10_H
-#define Y2_C_EX10_H
+#ifndef Y2_C_TP1EX10_H
+#define Y2_C_TP1EX10_H
 
 float ** rotateRightMat(float **mat, int mrows, int mcols) { //we use the rows of the original matrix as the columns of the new one
 	int cols = mrows;
@@ -56,4 +56,4 @@ float ** rotateRightMat(float **mat, int mrows, int mcols) { //we use the rows o
     return res;
 }
 
-#endif //Y2_C_EX10_H
+#endif //Y2_C_TP1EX10_H

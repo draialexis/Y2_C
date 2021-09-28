@@ -2,8 +2,8 @@
 // Created by draia on 25/09/2021.
 //
 
-#ifndef Y2_C_EX9_H
-#define Y2_C_EX9_H
+#ifndef Y2_C_TP1EX9_H
+#define Y2_C_TP1EX9_H
 
 #define GET_INPUT  printf("row: %d | col: %d | >", i + 1, j + 1); fgets(input, 15, stdin); x = strtof(input, &endptr); printf("%f\n", x);
 
@@ -38,4 +38,4 @@ void showMat(float **mat, int rows, int cols) {
     }
 }
 
-#endif //Y2_C_EX9_H
+#endif //Y2_C_TP1EX9_H

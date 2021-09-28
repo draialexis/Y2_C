@@ -2,8 +2,8 @@
 // Created by draia on 23/09/2021.
 //
 
-#ifndef Y2_C_EX6_H
-#define Y2_C_EX6_H
+#ifndef Y2_C_TP1EX6_H
+#define Y2_C_TP1EX6_H
 
 // it was tempting to "divide and rule", create a modular ensemble of small, simple functions
 // but the instructions said "_une_ fonction", so here we go
@@ -72,4 +72,4 @@ int *createRdmPerm(int n) {
     return arr;
 }
 
-#endif //Y2_C_EX6_H
+#endif //Y2_C_TP1EX6_H

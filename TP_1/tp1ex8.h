@@ -2,8 +2,8 @@
 // Created by draia on 25/09/2021.
 //
 
-#ifndef Y2_C_EX8_H
-#define Y2_C_EX8_H
+#ifndef Y2_C_TP1EX8_H
+#define Y2_C_TP1EX8_H
 
 float **createMat(int rows, int cols) {
 
@@ -23,4 +23,4 @@ float **createMat(int rows, int cols) {
     return mat;
 }
 
-#endif //Y2_C_EX8_H
+#endif //Y2_C_TP1EX8_H
