@@ -5,7 +5,7 @@
 #ifndef TP1_PA_EX7_H
 #define TP1_PA_EX7_H
 
-char *permuteString(const char *str, const int *arr) {
+char *permuteString(char *str, int *arr) {
     char *res = malloc(sizeof(char) * strlen(str));
     if (res == NULL) {
         MALLOC_FAIL
