@@ -40,7 +40,6 @@ int main() {
      * ints and unsigned ints take the same amount of memory each, and the function works as expected... it seems.
      */
     AfficheTab(arr1, N);
-
     ////
     printf("\nEX#2\n");
 
@@ -114,8 +113,10 @@ int main() {
     ////
     printf("\nEX#6\n");
 
-    createRdmPerm(N);
-    createRdmPerm(N);
+    int *arr7 = createRdmPerm(N);
+    free(arr7);
+    int *arr8 = createRdmPerm(N);
+    free(arr8);
 
     ////
     printf("\nEX#7\n");
@@ -124,10 +125,11 @@ int main() {
     char *str = malloc(sizeof(char) * 13);
     if (str != NULL) {
         sprintf(str, "abcdefghijkl");//hard-coding this is probably a bad idea
-        int *arr7 = createRdmPerm(N);
+        int *arr9 = createRdmPerm(N);
         //(!) array and string need to be same size. Crash or bug if array is smaller...?
         printf("%s\n", str);
-        printf("%s\n", permuteString(str, arr7));
+        printf("%s\n", permuteString(str, arr9));
+        free(arr9);
         free(str);
     } else {
         MALLOC_FAIL
@@ -137,25 +139,25 @@ int main() {
     printf("\nEX#8 & 9\n");
     float **mat1 = createMat_f(ROWS, COLS);
     fillMat_f(mat1, ROWS, COLS);
-// annoying to fill up everytime I debug another exercise
-//TODO uncomment this before submitting
+
     ////
     printf("\nEX#10\n");
-    /*float **mat2 = */rotateRightMat(mat1, ROWS, COLS);
+    float **mat2 = rotateRightMat(mat1, ROWS, COLS);
     ////
     printf("\nEX#11\n");
-//    freeMat(mat2, COLS, ROWS);
-//    showMat_f(mat2, COLS, ROWS);
+    freeMat(mat1, ROWS, COLS);
+    freeMat(mat2, COLS, ROWS);
 // TODO how can we see whether memory was freed?
 
     ////
     printf("\nEX#12\n");
-    pascalsTriangle(N);
+    int **pTri = pascalsTriangle(N);
+    //free(pTri); //TODO needs a proper freeTriangle function to get all the memory back, cf. freeMat
 
     ////
     printf("\nEX#13\n");
     List list1 = createList();
-    List * list1_ptr = &list1;
+    List *list1_ptr = &list1;
 
     printf("\nlistlen(list1) = %d\n", listlen(list1));
 
@@ -172,6 +174,8 @@ int main() {
 
     printf("start value = %d\n", startVal_list(list1));
     printf("end value = %d\n", endVal_list(list1));
+
+    //free(list1); //TODO needs a proper freeList function to get all the memory back, cf. freeMat
 
     return 0;
 }
