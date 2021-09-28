@@ -22,6 +22,7 @@
 #include "tp1ex10.h"
 #include "tp1ex11.h"
 #include "tp1ex12.h"
+#include "tp1ex13.h"
 
 int main() {
 
@@ -134,17 +135,23 @@ int main() {
 
     ////
     printf("\nEX#8 & 9\n");
-    float **mat1 = createMat_f(ROWS, COLS);
-    fillMat_f(mat1, ROWS, COLS);
-
+//    float **mat1 = createMat_f(ROWS, COLS);
+//    fillMat_f(mat1, ROWS, COLS);
+// annoying to fill up everytime I debug another exercise
+//TODO uncomment this before submitting
     ////
     printf("\nEX#10\n");
-    float **mat2 = rotateRightMat(mat1, ROWS, COLS);
+//    float **mat2 = rotateRightMat(mat1, ROWS, COLS);
 //    showMat_f(mat2, COLS, ROWS); //columns and rows will be reversed at that point
     ////
     printf("\nEX#11\n");
-    freeMat(mat2, COLS, ROWS);
-    showMat_f(mat2, COLS, ROWS);
+//    freeMat(mat2, COLS, ROWS);
+//    showMat_f(mat2, COLS, ROWS);
+// TODO how can we see whether memory was freed?
+
+    ////
+    printf("\nEX#12\n");
+    int **p_tri = pascalsTriangle(N);
 
     return 0;
 }

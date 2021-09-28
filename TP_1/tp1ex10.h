@@ -16,20 +16,16 @@ float **rotateRightMat(float **mat, int mrows, int mcols) {
         if (res == NULL) {
             MALLOC_FAIL
         }
-        for (int i = 0; i < rows; i++) {
-            res[i] = malloc(sizeof(float) * cols);
-            if (res[i] == NULL) {
-                MALLOC_FAIL
-            }
-            for (int j = 0; j < cols; j++) {
-                res[i][j] = counter++; What? Why?
-            }
-        }
+
         // at this point, a mat(3, 2) should have given us a res(2,3)
 
         //TODO https://www.geeksforgeeks.org/rotate-matrix-right-k-times/
 
         for (int i = 0; i < rows; i++) {
+            res[i] = malloc(sizeof(float) * cols);
+            if (res[i] == NULL) {
+                MALLOC_FAIL
+            }
             for (int j = 0; j < cols; j++) {
                 //*(*(res + i) + j) = *(*(mat + j) + i);
                 res[i][j] = mat[j][i];

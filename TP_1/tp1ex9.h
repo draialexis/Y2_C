@@ -19,8 +19,8 @@ void fillMat_f(float **mat, int rows, int cols) {
                 errno = 0;
                 GET_INPUT
 
-                while (x == 0 &&
-                       (errno != 0 || endptr == input)) { //input and endptr are the same if the input is invalid
+                while (x == 0 && (errno != 0 || endptr == input)) {
+                    //input and endptr are the same if the input is invalid
                     //except maybe not always, but errno may be set to EINVAL then -- so we check for that too
                     GET_INPUT
                 }

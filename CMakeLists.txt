@@ -17,4 +17,4 @@ add_executable(TP_1
         TP_1/tp1ex9.h
         TP_1/tp1ex10.h
         TP_1/tp1ex11.h
-        TP_1/tp1ex12.h)
+        TP_1/tp1ex12.h TP_1/tp1ex13.h)
