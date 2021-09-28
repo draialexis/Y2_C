@@ -55,4 +55,4 @@ dkms.conf
 *.idea/
 
 # MinGW CMake
-*.cmake*/
+cmake-build-release-mingw/
