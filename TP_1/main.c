@@ -135,14 +135,13 @@ int main() {
 
     ////
     printf("\nEX#8 & 9\n");
-//    float **mat1 = createMat_f(ROWS, COLS);
-//    fillMat_f(mat1, ROWS, COLS);
+    float **mat1 = createMat_f(ROWS, COLS);
+    fillMat_f(mat1, ROWS, COLS);
 // annoying to fill up everytime I debug another exercise
 //TODO uncomment this before submitting
     ////
     printf("\nEX#10\n");
-//    float **mat2 = rotateRightMat(mat1, ROWS, COLS);
-//    showMat_f(mat2, COLS, ROWS); //columns and rows will be reversed at that point
+    /*float **mat2 = */rotateRightMat(mat1, ROWS, COLS);
     ////
     printf("\nEX#11\n");
 //    freeMat(mat2, COLS, ROWS);
