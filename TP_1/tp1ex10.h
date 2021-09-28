@@ -11,7 +11,6 @@ float **rotateRightMat(float **mat, int mrows, int mcols) {
         int cols = mrows;
         int rows = mcols;
         float **res = malloc(sizeof(float *) * rows);
-        float counter = 1;
 
         if (res == NULL) {
             MALLOC_FAIL

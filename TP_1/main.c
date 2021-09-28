@@ -9,7 +9,7 @@
 #define COLS 4
 #define DEBUG printf("file %s; line %d\n", __FILE__, __LINE__);
 #define MALLOC_FAIL printf("!_malloc failed_!\n"); DEBUG; exit(EXIT_FAILURE);
-#define EMPTY_OR_NULL printf("this array should have a positive integer value as its size, and the pointer to it should be valid\n"); DEBUG;
+#define EMPTY_OR_NULL printf("this data structure doesn't have a positive integer value as its size, or the pointer to it isn't valid\n"); DEBUG;
 
 #include "tp1ex1.h"
 #include "tp1ex2.h"
@@ -151,7 +151,28 @@ int main() {
 
     ////
     printf("\nEX#12\n");
-    int **p_tri = pascalsTriangle(N);
+    pascalsTriangle(N);
+
+    ////
+    printf("\nEX#13\n");
+    List list1 = createList();
+    List * list1_ptr = &list1;
+
+    printf("\nlistlen(list1) = %d\n", listlen(list1));
+
+    addToStart_list(list1_ptr, 7);
+    showList(list1);
+
+    addToEnd_list(list1_ptr, 5);
+    showList(list1);
+
+    addToStart_list(list1_ptr, 4);
+    showList(list1);
+
+    printf("\nlistlen(list1) = %d\n", listlen(list1));
+
+    printf("start value = %d\n", startVal_list(list1));
+    printf("end value = %d\n", endVal_list(list1));
 
     return 0;
 }
