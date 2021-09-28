@@ -5,8 +5,11 @@
 #include <errno.h>
 
 #define N 12
+#define ROWS 3
+#define COLS 4
 #define DEBUG printf("file %s; line %d\n", __FILE__, __LINE__);
 #define MALLOC_FAIL printf("!_malloc failed_!\n"); DEBUG; exit(EXIT_FAILURE);
+#define EMPTY_OR_NULL printf("this array should have a positive integer value as its size, and the pointer to it should be valid\n"); DEBUG;
 
 #include "tp1ex1.h"
 #include "tp1ex2.h"
@@ -59,7 +62,7 @@ int main() {
      */
 
     //https://www.tutorialspoint.com/cprogramming/c_data_types.htm
-    //Why do my longs take only 4 bytes..? I do have a 64bit OS... Is my IDE compiler based on a 32bit OS?
+    //Why do my longs take only 4 bytes...? I do have a 64bit OS... Is my IDE compiler based on a 32bit OS?
     //My local Ubuntu does say 8 bytes... huh
 
     ////
@@ -86,6 +89,8 @@ int main() {
 
     int arr3[N] = {1, 3, 5, 6, 8, 2, 4, 7, 0, 10, 11, 9}; // isPermutation = 1
     int arr4[N] = {1, 3, 1, 6, 8, 2, 4, 7, 0, 10, 11, 9}; // isPermutation = 0 (double 1)
+    // redundancy between the 2, may make the program faster, should run the stats
+    // TODO check stats?
     int arr5[N] = {1, 9, 5, 6, 8, 2, 4, 7, 0, 10, 11, 9}; // isPermutation = 0 (missing 3)
     int arr6[N] = {86741, 56416, 41, 684, 6841, 68, 4, 6, 84, 684, 6, 6874}; // isPermutation = 0 (out of bounds)
     printf("\narr3: ");
@@ -114,11 +119,11 @@ int main() {
     printf("\nEX#7\n");
     //error in instructions: example shows a string with 9 chars and an array with 8 ints
 
-    char *str = malloc(sizeof(char) * 13); 
+    char *str = malloc(sizeof(char) * 13);
     if (str != NULL) {
-        sprintf(str, "qwertyuiopas");//hardcoding this is probably a bad idea
+        sprintf(str, "abcdefghijkl");//hard-coding this is probably a bad idea
         int *arr7 = createRdmPerm(N);
-        //(!) array and string need to be same size. Crash or bug if array is smaller..?
+        //(!) array and string need to be same size. Crash or bug if array is smaller...?
         printf("%s\n", str);
         printf("%s\n", permuteString(str, arr7));
         free(str);
@@ -128,15 +133,13 @@ int main() {
 
     ////
     printf("\nEX#8 & 9\n");
-    float **mat1 = createMat(2, 3);
-    fillMat(mat1, 2, 3);
-    showMat(mat1, 2, 3);
+    float **mat1 = createMat_f(ROWS, COLS);
+    fillMat_f(mat1, ROWS, COLS);
 
     ////
     printf("\nEX#10\n");
-	float **mat2 = rotateRightMat(mat1, 2, 3);
-	showMat(mat2, 3, 2);
-	
-	
+    float **mat2 = rotateRightMat(mat1, ROWS, COLS);
+
+
     return 0;
 }

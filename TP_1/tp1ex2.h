@@ -19,17 +19,22 @@ int fib(int n) {
 }
 
 int *createFibArr(int n) {
-    int *arr = malloc(sizeof(int) * n);
-    if (arr == NULL) {
-        MALLOC_FAIL
+    if (n > 0) {
+        int *arr = malloc(sizeof(int) * n);
+        if (arr == NULL) {
+            MALLOC_FAIL
+        }
+        int *arrStart = arr;
+        int i;
+        for (i = 0; i < n; i++) {
+            *arr = fib(i);
+            arr++;
+        }
+        return arrStart;
+    } else {
+        EMPTY_OR_NULL
+        return NULL;
     }
-    int *arrStart = arr;
-    int i;
-    for (i = 0; i < n; i++) {
-        *arr = fib(i);
-        arr++;
-    }
-    return arrStart;
 }
 
 #endif //Y2_C_TP1EX2_H

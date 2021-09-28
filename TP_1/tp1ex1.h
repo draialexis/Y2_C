@@ -6,18 +6,18 @@
 #define Y2_C_TP1EX1_H
 
 void AfficheTab(int *arr, int n) {
-    if (arr == NULL) {
-        printf("abort\n");
-        return;
-    }
-    int i;
-    for (i = 0; i < n; i++) {
-        printf("%d", arr[i]);
-        if (i < n - 1) {
-            printf(",");
-        } else {
-            printf("\n");
+    if (n > 0 && arr != NULL) {
+        int i;
+        for (i = 0; i < n; i++) {
+            printf("%d", arr[i]);
+            if (i < n - 1) {
+                printf(",");
+            } else {
+                printf("\n");
+            }
         }
+    } else {
+        EMPTY_OR_NULL
     }
 }
 
