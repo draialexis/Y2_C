@@ -139,7 +139,11 @@ int main() {
     ////
     printf("\nEX#10\n");
     float **mat2 = rotateRightMat(mat1, ROWS, COLS);
-
+//    showMat_f(mat2, COLS, ROWS); //columns and rows will be reversed at that point
+    ////
+    printf("\nEX#11\n");
+    freeMat(mat2, COLS, ROWS);
+    showMat_f(mat2, COLS, ROWS);
 
     return 0;
 }

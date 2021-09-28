@@ -7,7 +7,10 @@
 
 void freeMat(float **mat, int rows, int cols) {
     if (rows > 0 && cols > 0 && mat != NULL) {
-
+        for(int i = 0; i < rows; i++) {
+            free(mat[i]);
+        }
+        free(mat);
     } else {
         EMPTY_OR_NULL
     }

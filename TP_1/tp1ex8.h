@@ -7,7 +7,7 @@
 
 void showMat_f(float **mat, int rows, int cols) {
     if (rows > 0 && cols > 0 && mat != NULL) {
-        printf("yoink!\n");
+        printf("matrix:\n");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 printf("%+.2f ", *(*(mat + i) + j));
