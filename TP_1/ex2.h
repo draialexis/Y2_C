@@ -2,8 +2,8 @@
 // Created by draia on 23/09/2021.
 //
 
-#ifndef TP1_PA_EX2_H
-#define TP1_PA_EX2_H
+#ifndef Y2_C_EX2_H
+#define Y2_C_EX2_H
 
 int fib(int n) {
     if (n < 0) {
@@ -32,4 +32,4 @@ int *createFibArr(int n) {
     return arrStart;
 }
 
-#endif //TP1_PA_EX2_H
+#endif //Y2_C_EX2_H

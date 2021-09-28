@@ -2,20 +2,21 @@
 // Created by draia on 23/09/2021.
 //
 
-#ifndef TP1_PA_EX6_H
-#define TP1_PA_EX6_H
+#ifndef Y2_C_EX6_H
+#define Y2_C_EX6_H
 
 // it was tempting to "divide and rule", create a modular ensemble of small, simple functions
 // but the instructions said "_une_ fonction", so here we go
 
-int * createRdmPerm(int n) {
-    int * arr = malloc(sizeof(int) * n); // we have the size of the array as a parameter, not a constant. Perfect for malloc
+int *createRdmPerm(int n) {
+    int *arr = malloc(
+            sizeof(int) * n); // we have the size of the array as a parameter, not a constant. Perfect for malloc
 
     if (arr == NULL) { // this is just in case the memory allocation fails. If that happens, we have to get out
         MALLOC_FAIL
     }
 
-    int * arrStart = arr;
+    int *arrStart = arr;
     // this is to keep track of the start of the array. at this point in the program,
     // "arr" contains (the pointer to / the address of) the first item in the array.
     for (int i = 0; i < n; i++) {
@@ -51,9 +52,11 @@ int * createRdmPerm(int n) {
      */
     int tmp; //this temporary variable will be useful for swapping items in the array, without having to create a new array
     int j = 0;
-    for (int i = 0; i < n; i++) { // could actually be much smaller than 'n', just like you don't need to move 54 cards to shuffle a pack
+    for (int i = 0; i <
+                    n; i++) { // could actually be much smaller than 'n', just like you don't need to move 54 cards to shuffle a pack
         while (j == i) {// we want to avoid 'randoming' a 'j' that is the same as our initial 'i'
-            j = rand() % n; //that's how we use 'rand'. This would inevitably shuffle even a size-2 array... or would it? hmm
+            j = rand() %
+                n; //that's how we use 'rand'. This would inevitably shuffle even a size-2 array... or would it? hmm
         }
         tmp = arr[j]; // we place the item at index 'j' (!= i) into our temporary variable
         arr[j] = arr[i]; // we put the item at index 'i' into the box for the item at index 'j'
@@ -69,4 +72,4 @@ int * createRdmPerm(int n) {
     return arr;
 }
 
-#endif //TP1_PA_EX6_H
+#endif //Y2_C_EX6_H

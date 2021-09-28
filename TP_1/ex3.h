@@ -7,8 +7,8 @@
 
 // conflicts between: MinGW on Windows, and expected formats for a C program
 // compiled and executed on a Unix OS
-#ifndef TP1_PA_EX3_H
-#define TP1_PA_EX3_H
+#ifndef Y2_C_EX3_H
+#define Y2_C_EX3_H
 
 void variable(const char *types) {
     int i = 0;
@@ -44,5 +44,5 @@ void variable(const char *types) {
     }
 }
 
-#endif //TP1_PA_EX3_H
+#endif //Y2_C_EX3_H
 #pragma clang diagnostic pop
