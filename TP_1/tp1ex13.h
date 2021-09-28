@@ -12,16 +12,16 @@ struct LElement {
     int val_;
 };
 
-struct LListe {
+struct LList {
     int nb_elements_;
     Element *head_;
     Element *tail_;
 };
-typedef struct LListe Liste;
+typedef struct LList List;
 
 //1)
-Liste *createList() {
-    Liste *list = malloc(sizeof(Liste));
+List *createList() {
+    List *list = malloc(sizeof(List));
     if (list == NULL) {
         MALLOC_FAIL
     }
@@ -31,5 +31,17 @@ Liste *createList() {
 
     return list;
 }
+
+//2)
+int listlen(List list) {
+    Element *crntPtr = list.head_;
+    int counter = 0;
+    while (crntPtr != NULL) {
+        counter++;
+        crntPtr++;
+    }
+    return counter;
+}
+
 
 #endif //Y2_C_TP1EX13_H
