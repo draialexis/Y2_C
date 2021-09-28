@@ -12,10 +12,20 @@ int **pascalsTriangle(int n) {
         if (res == NULL) {
             MALLOC_FAIL
         }
+        int hasFailed = 0;
         for (int i = 0; i < n; i++) {
             res[i] = malloc(sizeof(float) * i + 1);
             // at 0th iteration, create a size1 array, etc.
             if (res[i] == NULL) {
+                hasFailed = 1;
+            }
+            if(hasFailed){
+                for (int j = 0; j < i; ++j) {
+                    if(res[i] != NULL){
+                        free(res[i]);
+                    }
+                }
+                free(res);
                 MALLOC_FAIL
             }
             for (int j = 0; j < i; j++) {

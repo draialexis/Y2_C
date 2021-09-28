@@ -8,7 +8,7 @@
 char *permuteString(char *str, int *arr) {
     // TODO more user input validation? seems rough in C, esp. given the _cahier des charges_
 
-    if(strlen(str) <= 0 && str != NULL && arr != NULL) {
+    if(strlen(str) > 0 && str != NULL && arr != NULL) {
         char *res = malloc(sizeof(char) * strlen(str));
         if (res == NULL) {
             MALLOC_FAIL

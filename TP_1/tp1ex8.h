@@ -21,19 +21,29 @@ void showMat_f(float **mat, int rows, int cols) {
 }
 
 float **createMat_f(int rows, int cols) {
-    if(rows > 0 && cols > 0) {
+    if (rows > 0 && cols > 0) {
         float **mat = malloc(sizeof(float *) * rows);
 
         if (mat == NULL) {
             MALLOC_FAIL
         }
+        int hasFailed = 0;
         for (int i = 0; i < rows; i++) {
 
             mat[i] = malloc(cols * sizeof(float));
 
             if (mat[i] == NULL) {
-                MALLOC_FAIL
+                hasFailed = 1;
             }
+        }
+        if (hasFailed) {
+            for (int i = 0; i < rows; i++) {
+                if (mat[i] != NULL) {
+                    free(mat[i]);
+                }
+            }
+            free(mat);
+            MALLOC_FAIL
         }
         showMat_f(mat, rows, cols);
         return mat;
