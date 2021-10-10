@@ -5,14 +5,6 @@
 #ifndef Y2_C_TP2EX1_H
 #define Y2_C_TP2EX1_H
 
-void checkFopen(FILE *fileName) {
-    if (fileName == NULL) {
-        EMPTY_OR_NULL
-        perror("error while opening file");
-        FAIL_OUT
-    }
-}
-
 void copyFile(char *f1_name, char *f2_name) {
     int c;
 

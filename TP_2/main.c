@@ -10,8 +10,9 @@
 #define MALLOC_FAIL printf("!_malloc failed_!\n"); DEBUG; FAIL_OUT;
 #define EMPTY_OR_NULL printf("this data structure doesn't have a positive integer value as its size, or the pointer to it isn't valid\n"); DEBUG;
 
+#include "toolbox.h"
 #include "tp2ex1.h"
-//#include "tp2ex2.h"
+#include "tp2ex2.h"
 //#include "tp2ex3.h"
 //#include "tp2ex4.h"
 //#include "tp2ex5.h"
@@ -31,11 +32,19 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(mode, "diff") == 0) {
             showDiff(f1_name, f2_name);
         } else {
-            printf("argument 1 is supposed to be \"copie\" or \"diff\"");
+            //ex2
+            if (strcmp(mode, "concatene") == 0) {
+                showDiff(f1_name, f2_name);
+            }
+            printf("argument 1 is supposed to be \"copie\", \"diff\", or \"concatene\"");
         }
     } else {
         printf("expecting exactly 3 arguments (mode, f1, f2)\n");
     }
     //doing it with a binary file seems to work: no diff, and it executes well when using the same arguuments
+
+    //ex2
+
+
     return 0;
 }

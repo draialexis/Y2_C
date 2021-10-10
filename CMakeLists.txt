@@ -23,5 +23,15 @@ add_executable(
 #        TP_1/tp1ex13.h
 
         TP_2
-        tp_2/main.c
+        TP_2/main.c
+        TP_2/toolbox.h
+        TP_2/tp2ex1.h
+        TP_2/tp2ex2.h
+#        TP_2/tp2ex3.h
+#        TP_2/tp2ex4.h
+#        TP_2/tp2ex5.h
+#        TP_2/tp2ex6.h
+#        TP_2/tp2ex7.h
+#        TP_2/tp2ex8.h
+#        TP_2/tp2ex9.h
 )
