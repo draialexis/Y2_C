@@ -34,9 +34,10 @@ int main(int argc, char *argv[]) {
         } else {
             //ex2
             if (strcmp(mode, "concatene") == 0) {
-                showDiff(f1_name, f2_name);
+                appendFile(f1_name, f2_name);
+            } else {
+                printf("argument 1 is supposed to be \"copie\", \"diff\", or \"concatene\"");
             }
-            printf("argument 1 is supposed to be \"copie\", \"diff\", or \"concatene\"");
         }
     } else {
         printf("expecting exactly 3 arguments (mode, f1, f2)\n");

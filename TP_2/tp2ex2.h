@@ -5,4 +5,24 @@
 #ifndef Y2_C_TP2EX2_H
 #define Y2_C_TP2EX2_H
 
+void appendFile(char *f1_name, char *f2_name) {
+    int c;
+
+    FILE *f1 = fopen(f1_name, "r");
+    checkFopen(f1);
+
+    FILE *f2 = fopen(f2_name, "a");
+    checkFopen(f2);
+
+    while (1) {
+        c = fgetc(f1);
+        if (feof(f1)) {
+            break;
+        }
+        fprintf(f2, "%c", c);
+    }
+    fclose(f1);
+    fclose(f2);
+}
+
 #endif //Y2_C_TP2EX2_H
