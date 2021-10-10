@@ -13,7 +13,7 @@
 #include "toolbox.h"
 #include "tp2ex1.h"
 #include "tp2ex2.h"
-//#include "tp2ex3.h"
+#include "tp2ex3.h"
 //#include "tp2ex4.h"
 //#include "tp2ex5.h"
 //#include "tp2ex6.h"
@@ -23,6 +23,7 @@
 
 int main(int argc, char *argv[]) {
     //ex1
+    //doing it with a binary file seems to work: no diff, and it executes well when using the same arguuments
     if (argc == 4) {
         char *mode = argv[1];
         char *f1_name = argv[2];
@@ -31,21 +32,22 @@ int main(int argc, char *argv[]) {
             copyFile(f1_name, f2_name);
         } else if (strcmp(mode, "diff") == 0) {
             showDiff(f1_name, f2_name);
-        } else {
+        } else if (strcmp(mode, "concatene") == 0) {
             //ex2
-            if (strcmp(mode, "concatene") == 0) {
-                appendFile(f1_name, f2_name);
-            } else {
-                printf("argument 1 is supposed to be \"copie\", \"diff\", or \"concatene\"");
-            }
+            appendFile(f1_name, f2_name);
+        } else {
+            printf("argument 1 is supposed to be \"copie\", \"diff\", or \"concatene\"\n");
+        }
+    } else if (argc == 3) {
+        char *mode = argv[1];
+        char *f1_name = argv[2];
+        if (strcmp(mode, "vwl") == 0) {
+            //ex3
+            removeVowels(f1_name);
         }
     } else {
         printf("expecting exactly 3 arguments (mode, f1, f2)\n");
     }
-    //doing it with a binary file seems to work: no diff, and it executes well when using the same arguuments
-
-    //ex2
-
 
     return 0;
 }
