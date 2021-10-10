@@ -19,7 +19,9 @@ void appendFile(char *f1_name, char *f2_name) {
         if (feof(f1)) {
             break;
         }
-        if(fputc(c, f2) == EOF){//writes each character while checking if the writing was successful
+        if (c < 0 || c > 255 || fputc(c, f2) == EOF) {
+            //writes each character while checking if the writing was successful
+            printf("non-char detected\n");
             FAIL_OUT
         }
     }
