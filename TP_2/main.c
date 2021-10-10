@@ -14,7 +14,7 @@
 #include "tp2ex1.h"
 #include "tp2ex2.h"
 #include "tp2ex3.h"
-//#include "tp2ex4.h"
+#include "tp2ex4.h"
 //#include "tp2ex5.h"
 //#include "tp2ex6.h"
 //#include "tp2ex7.h"
@@ -45,8 +45,16 @@ int main(int argc, char *argv[]) {
             //ex3
             removeVowels(f1_name);
         }
+    } else if (argc == 2) {
+        //ex4
+        // & wc ex4
+        // 2    2 2048 ex4
+        // size of int = 4 ; 4 * 512 = 2048 ; coherent
+        // od also seems consistent
+        char *f_name = argv[1];
+        copyArray(f_name);
     } else {
-        printf("expecting exactly 3 arguments (mode, f1, f2)\n");
+        printf("no arguments?\n");
     }
 
     return 0;
