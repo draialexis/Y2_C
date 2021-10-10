@@ -36,5 +36,6 @@ int main(int argc, char *argv[]) {
     } else {
         printf("expecting exactly 3 arguments (mode, f1, f2)\n");
     }
+    //doing it with a binary file seems to work: no diff, and it executes well when using the same arguuments
     return 0;
 }
