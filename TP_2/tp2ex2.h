@@ -19,7 +19,9 @@ void appendFile(char *f1_name, char *f2_name) {
         if (feof(f1)) {
             break;
         }
-        fprintf(f2, "%c", c);
+        if(fputc(c, f2) == EOF){//writes each character while checking if the writing was succesful
+            FAIL_OUT
+        }
     }
     fclose(f1);
     fclose(f2);
