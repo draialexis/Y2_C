@@ -58,4 +58,4 @@ dkms.conf
 cmake-build-release-mingw/
 cmake-build-debug-wsl/
 cmake-build-wsl
-cmake-build-mingw
+TP_1/cmake-build-mingw
