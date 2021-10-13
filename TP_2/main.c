@@ -15,7 +15,7 @@
 #include "tp2ex2.h"
 #include "tp2ex3.h"
 #include "tp2ex4.h"
-//#include "tp2ex5.h"
+#include "tp2ex5.h"
 //#include "tp2ex6.h"
 //#include "tp2ex7.h"
 //#include "tp2ex8.h"
@@ -54,7 +54,9 @@ int main(int argc, char *argv[]) {
         char *f_name = argv[1];
         copyArray(f_name);
     } else {
-        printf("no arguments?\n");
+        printf("no arguments?\ndoing part 2\n");
+
+        encode("txt_f.txt", "perm_f.txt");
     }
 
     return 0;
