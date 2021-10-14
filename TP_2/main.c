@@ -23,7 +23,7 @@
 
 int main(int argc, char *argv[]) {
     //ex1
-    //doing it with a binary file seems to work: no diff, and it executes well when using the same arguuments
+    //doing it with a binary file seems to work: no diff, and it executes well when using the same arguments
     if (argc == 4) {
         char *mode = argv[1];
         char *f1_name = argv[2];
