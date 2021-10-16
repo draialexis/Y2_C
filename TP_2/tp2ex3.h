@@ -27,7 +27,7 @@ void removeVowels(char *f_name) {
             c != 'o' && c != 'O' &&
             c != 'u' && c != 'U' &&
             c != 'y' && c != 'Y') {
-            sprintf(b + strlen(b), "%c", c);
+            sprintf(b + strlen(b), "%c", c);// could have used strncat...?
         }
     }
     fclose(fp);
