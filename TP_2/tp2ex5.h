@@ -83,12 +83,12 @@ void encode(char *txt_f_name, char *perm_f_name)
     /*
     printf("%s\n", txt);
 
-    if (n > 0 && perm != NULL)
+    if (n > 0 && Perm != NULL)
     {
         int i;
         for (i = 0; i < n; i++)
         {
-            printf("%d", perm[i]);
+            printf("%d", Perm[i]);
             if (i < n - 1)
             {
                 printf(",");
