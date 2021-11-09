@@ -7,20 +7,24 @@
 
 #define BFR 512
 
-char *permuteString(char *str, int *arr) {
-    // TODO more user input validation? seems rough in C, esp. given the _cahier des charges_
-
-    if (strlen(str) > 0 && str != NULL && arr != NULL) {
-        char *res = malloc(sizeof(char) * strlen(str));
-        if (res == NULL) {
-            MALLOC_FAIL
-        }
+char *permuteString(char *str, int *perm, int n) {
+    // more user input validation? seems rough in C, esp. given the _cahier des charges_
+    if (strlen(str) > 0 && str != NULL && perm != NULL) {
+        char *res = mkStr((int) strlen(str));
 
         sprintf(res, "%s", str); //initializing the string
 
-        for (int i = 0; i < strlen(str); i++) {
-            res[arr[i]] = str[i];
-            printf("res[%d] = %c / str[%d] = %c\n", arr[i], res[arr[i]], i, str[i]);
+        int e_counter = 0;
+        int i_counter = n;
+        while (i_counter == n && e_counter < strlen(str) - n) {
+            i_counter = 0;
+            for (int i = 0; i < n; i++) {
+                res[perm[i] + e_counter] = str[i + e_counter];
+//                printf("res[%d] = %c / str[%d] = %c\n",
+//                       perm[i] + e_counter, res[perm[i] + e_counter], i + e_counter, str[i + e_counter]);
+                i_counter++;
+            }
+            e_counter += n;
         }
         return res;
     } else {
@@ -29,21 +33,64 @@ char *permuteString(char *str, int *arr) {
     }
 }
 
-void encode(char *txt_f_name, char *perm_f_name) {
-    printf("%s and %s\n", txt_f_name, perm_f_name);
+int isPermutation(const int *arr, int n) {
+    if (n > 0 && arr != NULL) {//make sure that the pointer does point to an address, check for size0, exit otherwise
+
+        int count = 0; //we want to make sure that we don't get doubles, as per the instructions
+
+        for (int i = 0; i < n; i++) {//so we start a loop to go through the entire array
+            if (i > 0) {
+                /*
+                 * once we've gone through the 0th iteration, and we start the 1th iteration, we can check to make sure that 0
+                 * does exist in the array. If not, we don't need to keep evaluating it, and we can get out.
+                 * And so on until the last value in the array (n-1)
+                 */
+                if (count != 1) {
+                    printf("element: %d wasn't found\n", i - 1);
+                    return 0;
+                }
+            }
+
+            count = 0; // we reset 'count' to 0 -- useless for the 0th iteration, but crucial for all the others
+
+            for (int j = 0; j < n; j++) {
+                // this second loop will enable us to stop on each item from the first loop and run a few tests
+                if (arr[j] >= n || arr[j] < 0) {// is the item outside the interval (0 -- n-1)? If so, we're done
+                    printf("element: %d out of bounds\n", arr[j]);
+                    return 0;
+                }
+                if (arr[j] == i) {
+                    /*
+                     * because of the nature of the "permutations" we are looking for, all possible indices (0 -- n-1) should
+                     * exist as items in the arrays! That's pretty unusual, and maybe a bit confusing at first
+                     *
+                     * so we can check that 'i' does indeed exist as an item in the array
+                     */
+                    count++;
+                    if (count > 1) { //we found 'i', that's great. We found 'i' again though, and that's bad. We're out
+                        printf("element: %d appears more than once\n", arr[j]);
+                        return 0;
+                    }
+                }
+            }
+        }
+        // if our program has escaped all the fail conditions, then the statement "arr is a permutation" is true
+        return 1;
+    } else {
+        EMPTY_OR_NULL
+        return 0;
+    }
+}
+
+char *encode(char *txt_f_name, char *perm_f_name) {
     FILE *fp_txt = fopen(txt_f_name, "r");
     checkFopen(fp_txt);
     FILE *fp_perm = fopen(perm_f_name, "r");
     checkFopen(fp_perm);
 
     int c;
-    char *txt = (char *) malloc(sizeof(char) * BFR);
-    sprintf(txt, "%c", '\0');
-    int *perm = (int *) malloc(sizeof(int) * BFR);
-
-    if (txt == NULL || perm == NULL) {
-        MALLOC_FAIL
-    }
+    char *txt = mkStr(BFR);
+    int *perm = mkIntArr(BFR);
 
     while (1) {
         c = fgetc(fp_txt);
@@ -52,8 +99,8 @@ void encode(char *txt_f_name, char *perm_f_name) {
         }
         sprintf(txt + strlen(txt), "%c", c);
     }
+
     printf("%s\n", txt);
-    DEBUG
     char *txt_perm = (char *) malloc(sizeof(char) * BFR);
     sprintf(txt_perm, "%c", '\0');
 
@@ -63,57 +110,25 @@ void encode(char *txt_f_name, char *perm_f_name) {
         if (feof(fp_perm)) {
             break;
         }
-        // vomitting face emoji
-        sprintf(txt_perm + n, "%c", c);
+        // vomitting face emoji : couldn't manage to extract a string from the file,
+        // so extracted chars, converted to string, then converted to int
+        sprintf(txt_perm, "%c", c);
         perm[n] = atoi(txt_perm);
         n++;
     }
-    DEBUG
-    printf("%s\n", txt_perm);
-    DEBUG
+
     for (int i = 0; i < n; ++i) {
         printf("%d", perm[i]);
     }
     printf("\n");
-    DEBUG
-    // printing file contents, debugging
-    /*
-    printf("%s\n", txt);
-
-    if (n > 0 && Perm != NULL)
-    {
-        int i;
-        for (i = 0; i < n; i++)
-        {
-            printf("%d", Perm[i]);
-            if (i < n - 1)
-            {
-                printf(",");
-            }
-            else
-            {
-                printf("\n");
-            }
-        }
-    }
-    else
-    {
-        EMPTY_OR_NULL
-    }
-    */
 
     fclose(fp_txt);
     fclose(fp_perm);
-
-//    fp_txt = fopen(txt_f_name, "w");
-//    fp_perm = fopen(perm_f_name, "w");
-//
-//    for (int i = 0; i < strlen(txt) / n; i++) {
-//
-//    }
-//
-//    fclose(fp_txt);
-//    fclose(fp_perm);
+    if (isPermutation(perm, n)) {
+        return permuteString(txt, perm, n);
+    } else {
+        return "the sequence of numbers was evaluated as _not a permutation_";
+    }
 }
 
 #endif //Y2_C_TP2EX5_H

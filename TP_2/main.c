@@ -54,9 +54,9 @@ int main(int argc, char *argv[]) {
         char *f_name = argv[1];
         copyArray(f_name);
     } else {
-        printf("no arguments?\ndoing part 2\n");
+        printf("no arguments? doing part 2...\n");
 
-        encode("txt_f.txt", "perm_f.txt");
+        printf("%s", encode("txt_f.txt", "perm_f.txt"));
     }
 
     return 0;
