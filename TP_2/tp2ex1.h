@@ -15,13 +15,9 @@ void copyFile(char *f1_name, char *f2_name)
     FILE *f2 = fopen(f2_name, "w");
     checkFopen(f2);
 
-    while (1)
+    while (!feof(f1))
     {
         c = fgetc(f1);
-        if (feof(f1))
-        {
-            break;
-        }
         if (c < 0 || c > 255 || fputc(c, f2) == EOF)
         {
             //writes each character while checking if the writing was successful

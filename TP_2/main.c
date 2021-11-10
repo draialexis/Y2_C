@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "toolbox.h"
 #include "tp2ex1.h"
@@ -12,7 +13,7 @@
 #include "tp2ex4.h"
 #include "tp2ex5.h"
 #include "tp2ex6.h"
-//#include "tp2ex7.h"
+#include "tp2ex7.h"
 //#include "tp2ex8.h"
 //#include "tp2ex9.h"
 
@@ -53,6 +54,7 @@ int main(int argc, char *argv[]) {
         char *permName = "perm_f.txt";
         encode("txt_f.txt", permName);
         decode("encoded.txt", permName);
+        cesar("ex7_orig.txt", 1);
     }
 
     return 0;

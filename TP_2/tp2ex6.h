@@ -5,6 +5,8 @@
 #ifndef Y2_C_TP2EX6_H
 #define Y2_C_TP2EX6_H
 
+void decode(char *txt_f_name, char *perm_f_name);
+
 void decode(char *txt_f_name, char *perm_f_name) {
 
     int n = 0;
