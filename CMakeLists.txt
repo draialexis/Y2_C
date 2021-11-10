@@ -30,8 +30,8 @@ add_executable(
         TP_2/tp2ex3.h
         TP_2/tp2ex4.h
         TP_2/tp2ex5.h
-#        TP_2/tp2ex6.h
+        TP_2/tp2ex6.h
 #        TP_2/tp2ex7.h
 #        TP_2/tp2ex8.h
 #        TP_2/tp2ex9.h
-        TP_2/tp2ex5.c)
+)
