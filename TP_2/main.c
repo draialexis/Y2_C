@@ -14,7 +14,8 @@
 #include "tp2ex5.h"
 #include "tp2ex6.h"
 #include "tp2ex7.h"
-//#include "tp2ex8.h"
+#include "..\TP_1\tp1ex13.h"
+#include "tp2ex8.h"
 //#include "tp2ex9.h"
 
 int main(int argc, char *argv[]) {
@@ -55,6 +56,13 @@ int main(int argc, char *argv[]) {
         encode("txt_f.txt", permName);
         decode("encoded.txt", permName);
         cesar("ex7_orig.txt", 1);
+        printf("and part 3\n");
+        List l = createList();
+        int nums[] = {1, 25, 9, 3, 6, 9, 8, 247, -15};
+        for (int i = 0; i < 9; ++i) {
+            addToEnd_list(&l, nums[i]);
+        }
+        writeListToFile(l);
     }
 
     return 0;

@@ -5,19 +5,31 @@
 #ifndef Y2_C_TP1EX13_H
 #define Y2_C_TP1EX13_H
 
-typedef struct LElement Element;
-struct LElement {
-    Element *next_;
-    Element *prev_;
+typedef struct LElement {
+    struct LElement *next_;
+    struct LElement *prev_;
     int val_;
-};
+} Element;
 
-struct LList {
+typedef struct LList {
     int nb_elements_;
     Element *head_;
     Element *tail_;
-};
-typedef struct LList List;
+} List;
+
+List createList();
+
+int listlen(List list);
+
+int addToEnd_list(List *listPtr, int val);
+
+int addToStart_list(List *listPtr, int val);
+
+int endVal_list(List list);
+
+int startVal_list(List list);
+
+void showList(List list);
 
 //1)
 List createList() {
@@ -28,7 +40,6 @@ List createList() {
     list->nb_elements_ = 0;
     list->head_ = NULL;
     list->tail_ = NULL;
-    printf("empty list created\n");
     return *list;//return the list proper instead of a pointer to it...?
 }
 
@@ -101,7 +112,6 @@ int startVal_list(List list) {
 //};
 //typedef struct LIterator Iterator;
 
-////
 
 void showList(List list) {
     printf("\nprinting list\n");
