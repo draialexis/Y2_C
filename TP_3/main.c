@@ -16,8 +16,11 @@ int main(int argc, char *argv[]) {
         str clip = argv[2];
         wri2k(f_name, clip);
     } else {
-        str nums = "456 3 -59 11";
-//        int *arr = decoupage(nums);
+        str nums = "3-H-23 a-b67 89 _5-56f-hui5";
+        int n;
+        str *arr = decoupage(nums, &n);
+        printf("size: %d", n);
+        showStrArr(arr, n);
     }
     return 0;
 }
