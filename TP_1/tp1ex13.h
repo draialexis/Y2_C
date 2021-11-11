@@ -114,11 +114,16 @@ int startVal_list(List list) {
 
 
 void showList(List list) {
-    printf("\nprinting list\n");
+    printf("list: {");
     Element *currentPtr = list.head_;
     for (int i = 0; i < listlen(list); i++) {
-        printf("value at 'list[%d]' = %d\n", i, currentPtr->val_);
+        printf("%d", currentPtr->val_);
         currentPtr = currentPtr->next_;
+        if(i == listlen(list) - 1){
+            printf("}");
+        } else {
+            printf(" -> ");
+        }
     }
 }
 

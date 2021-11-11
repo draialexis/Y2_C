@@ -5,32 +5,29 @@
 #ifndef Y2_C_TP2EX9_H
 #define Y2_C_TP2EX9_H
 
-#define BFR 512
 
-void getListFromFile(char *txt_f_name, List *l);
+void getListFromFile(char *txt_f_name, List *lPtr);
 
-void getListFromFile(char *txt_f_name, List *l) {
+void getListFromFile(char *txt_f_name, List *lPtr) {
     FILE *f = fopen(txt_f_name, "r");
     checkFopen(f);
 
-//    int num;
-    int n = 0;
+    fseek(f, 10, SEEK_SET);
+    char c;
+    char *tmp = mkStr(64);
 
     while (!feof(f)) {
-        fgetc(f);
-        n++;
+        c = (char) fgetc(f);
+        if (c != ',') {
+            strcat(tmp, &c);
+        } else {
+            fseek(f, 1, SEEK_CUR);// skip the comma and whitespace
+            addToEnd_list(lPtr, strtol(tmp, NULL, 10));
+            sprintf(tmp, "%c", '\0');
+        }
     }
-    fseek(f, 0, SEEK_SET);
+    addToEnd_list(lPtr, strtol(tmp, NULL, 10));
 
-    char *str = mkStr(n);
-    char *tmp = mkStr(1);
-
-    while(!feof(f)){
-        sprintf(tmp,"%c", fgetc(f));
-        strcat(str, tmp);
-    }
-//    fread(str, sizeof(char), n, f);
-    printf("%s\n", str);
     fclose(f);
 }
 
