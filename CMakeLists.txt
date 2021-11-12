@@ -41,4 +41,5 @@ add_executable(
         TP_3/ex1/tp3ex1.c
         TP_3/ex2/tp3ex2.c
         TP_3/ex3/tp3ex3.c
+        TP_3/ex4/tp3ex4.c
 )

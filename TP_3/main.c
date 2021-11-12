@@ -2,6 +2,7 @@
 #include "ex1/tp3ex1.h"
 #include "ex2/tp3ex2.h"
 #include "ex3/tp3ex3.h"
+#include "ex4/tp3ex4.h"
 
 int main(int argc, char *argv[]) {
     //1)
@@ -23,6 +24,11 @@ int main(int argc, char *argv[]) {
         checkFopen(f, f_name);
         myWc(f, &l, &w, &c);
         printf("  %d  %d %d %s\n", l, w, c, f_name);
+        //4)
+        printf("%f\n", avg(2, 5, 4));
+        //// if there is a non-int in our params, the program compiles, and executes, but the behavior is erroneous
+        //// if n (the size) is greater than the number of other params, behavior is erroneous
+        //// if n is less, some params get ignored of course
     }
     return 0;
 }

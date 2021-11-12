@@ -12,6 +12,7 @@ typedef char *str;
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdarg.h>
 
 #define DEBUG printf("file %s; line %d\n", __FILE__, __LINE__);
 #define FAIL_OUT DEBUG exit(EXIT_FAILURE);
