@@ -4,6 +4,7 @@
 
 #ifndef Y2_C_FOO_H
 #define Y2_C_FOO_H
+#include <stdio.h>
 
 #define N 18
 

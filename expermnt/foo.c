@@ -4,5 +4,6 @@
 #include "foo.h"
 
 int foo(int n) {
+    printf("hello\n");
     return n + N;
 }

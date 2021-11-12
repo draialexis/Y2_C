@@ -4,7 +4,7 @@ project(Y2_C)
 
 set(CMAKE_C_STANDARD 11)
 
-include_directories(TP_1 TP_2)
+include_directories(TP_1 TP_2 TP_3)
 
 add_executable(
 #        TP_1
@@ -35,15 +35,14 @@ add_executable(
 #        TP_2/tp2ex8.h
 #        TP_2/tp2ex9.h
 
-#        TP_3
-#        TP_3/main.c
-#        TP_3/toolbox.h
-#        TP_3/tp3ex1.h
-#        TP_3/tp3ex2.h
-#        TP_3/tp3ex3.h
-
-        expermnt
-        expermnt/main.c
-        expermnt/foo.h
-        expermnt/foo.c
+        TP_3
+        TP_3/main.c
+        TP_3/toolbox.c
+        TP_3/toolbox.h
+        TP_3/ex1/tp3ex1.c
+        TP_3/ex1/tp3ex1.h
+        TP_3/ex2/tp3ex2.c
+        TP_3/ex2/tp3ex2.h
+        TP_3/ex3/tp3ex3.c
+        TP_3/ex3/tp3ex3.h
 )
