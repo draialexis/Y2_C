@@ -24,5 +24,4 @@ void checkFopen(FILE *fileName);
 
 char *mkStr(int size);
 
-
 #endif //Y2_C_TOOLBOX_H
