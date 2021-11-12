@@ -10,6 +10,12 @@
 #define MALLOC_FAIL printf("!_malloc failed_!\n"); DEBUG FAIL_OUT
 #define EMPTY_OR_NULL printf("this data structure doesn't have a positive integer value as its size, or the pointer to it isn't valid\n"); DEBUG FAIL_OUT;
 
+void showStrArr(str *arr, int n);
+
+void checkFopen(FILE *fileName);
+
+char *mkStr(int size);
+
 void showStrArr(str *arr, int n) {
     if (n > 0 && arr != NULL) {
         int i;
@@ -42,15 +48,6 @@ char *mkStr(int size) {
         MALLOC_FAIL
     }
     sprintf(res, "%c", '\0');
-    return res;
-}
-
-int *mkIntArr(int size) {
-    int *res = NULL;
-    res = malloc(sizeof(int) * size);
-    if (res == NULL) {
-        MALLOC_FAIL
-    }
     return res;
 }
 

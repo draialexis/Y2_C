@@ -40,4 +40,5 @@ add_executable(
         TP_3/toolbox.h
         TP_3/tp3ex1.h
         TP_3/tp3ex2.h
+        TP_3/tp3ex3.h
 )

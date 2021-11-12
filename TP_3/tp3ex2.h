@@ -5,9 +5,16 @@
 
 #ifndef Y2_C_TP3EX2_H
 #define Y2_C_TP3EX2_H
+/**
+ * gets integers from a string
+ *
+ * @param input: the string to be parsed
+ * @param count: a pointer to an external variable that represents the size of the array to be returned
+ * @return an array of strings with an integer value in each string
+ */
+str *getIntsFromStr(str input, int *count);
 
-
-str *decoupage(str input, int *count) {
+str *getIntsFromStr(str input, int *count) {
     if (input == NULL || strcmp(input, "") == 0 || count == NULL) {
         EMPTY_OR_NULL
     }
@@ -61,13 +68,11 @@ str *decoupage(str input, int *count) {
                 if (j == n - 1) {
                     //it's the last char and it's an digit, we're ready to copy it to the array (no next digit to wait for)
                     strcpy(res[i], num);
-                    printf("lres[%d]=%s\n", i, res[i]);
                 }
             } else if (ch == '-') { //it's part of a digit too, but it's the beginning of one.
                 if (isDigitPrev && !isMinus) {
                     // if we just saw part of an int, we can copy that into the array now
                     strcpy(res[i], num);
-                    printf("-res[%d]=%s\n", i, res[i]);
                     sprintf(num, "%c", ch);//and start our new int
                     isDigitPrev = 0;
                     j++;
@@ -81,7 +86,6 @@ str *decoupage(str input, int *count) {
                     //so the last digit that we just saw was the last part of an int that we can now copy
                     isDigitPrev = 0;
                     strcpy(res[i], num);
-                    printf("nres[%d]=%s\n", i, res[i]);
                     sprintf(num, "%c", '\0');
                     j++;
                     break;

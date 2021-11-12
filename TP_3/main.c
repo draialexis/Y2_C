@@ -9,6 +9,7 @@ typedef char *str;
 #include "toolbox.h"
 #include "tp3ex1.h"
 #include "tp3ex2.h"
+#include "tp3ex3.h"
 
 int main(int argc, char *argv[]) {
     if (argc == 3) {
@@ -18,7 +19,7 @@ int main(int argc, char *argv[]) {
     } else {
         str nums = "3-H-23 a-b67 89 _5-56f-hui5";
         int n;
-        str *arr = decoupage(nums, &n);
+        str *arr = getIntsFromStr(nums, &n);
         printf("size: %d", n);
         showStrArr(arr, n);
     }
