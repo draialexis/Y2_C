@@ -19,8 +19,10 @@ int main(int argc, char *argv[]) {
         //3)
         int w, c, l;
         str f_name = "shakey.txt";
-        myWc(f_name, &l, &w, &c);
-        printf("%d %d %d %s", l, w, c, f_name);
+        FILE *f = fopen(f_name, "r");
+        checkFopen(f, f_name);
+        myWc(f, &l, &w, &c);
+        printf("  %d  %d %d %s\n", l, w, c, f_name);
     }
     return 0;
 }

@@ -20,7 +20,7 @@ typedef char *str;
 
 void showStrArr(str *arr, int n);
 
-void checkFopen(FILE *fileName);
+void checkFopen(FILE *f, str f_name);
 
 char *mkStr(int size);
 

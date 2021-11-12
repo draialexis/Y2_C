@@ -5,13 +5,13 @@
 #include "../toolbox.h"
 
 void wri2k(str f_name, str clip) {
-    FILE *fh = fopen(f_name, "w+");
-    checkFopen(fh);
+    FILE *f = fopen(f_name, "w+");
+    checkFopen(f, f_name);
     for (int i = 0; i < 2000; i++) {
-        fputs(clip, fh);
+        fputs(clip, f);
         usleep((rand() % 100) + 1); //make the program sleep for 1 to 100 milsec
     }
-    fclose(fh);
+    fclose(f);
 }
 
 // when launching the same program twice at the same time, both strings

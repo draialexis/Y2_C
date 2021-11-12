@@ -22,10 +22,10 @@ void showStrArr(str *arr, int n) {
     }
 }
 
-void checkFopen(FILE *fileName) {
-    if (fileName == NULL) {
+void checkFopen(FILE *f, str f_name) {
+    if (f == NULL) {
         EMPTY_OR_NULL
-        perror("error while opening file");
+        printf("error while opening file %s\n", f_name);
         FAIL_OUT
     }
 }
