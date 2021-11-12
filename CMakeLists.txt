@@ -38,11 +38,7 @@ add_executable(
         TP_3
         TP_3/main.c
         TP_3/toolbox.c
-        TP_3/toolbox.h
         TP_3/ex1/tp3ex1.c
-        TP_3/ex1/tp3ex1.h
         TP_3/ex2/tp3ex2.c
-        TP_3/ex2/tp3ex2.h
         TP_3/ex3/tp3ex3.c
-        TP_3/ex3/tp3ex3.h
 )
