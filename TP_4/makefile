@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-c -Wall
 LDFLAGS=
-SOURCES=main.c toolbox.c ex1/tp4ex1.c
+SOURCES=main.c toolbox.c ex3/tp4ex3.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=main
 .PHONY: clean

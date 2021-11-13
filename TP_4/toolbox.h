@@ -5,18 +5,22 @@
 #ifndef Y2_C_TOOLBOX_H
 #define Y2_C_TOOLBOX_H
 
-typedef char *str;
+#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
+#define BYTE_TO_BINARY(byte)  \
+  (byte & 0x80 ? '1' : '0'), \
+  (byte & 0x40 ? '1' : '0'), \
+  (byte & 0x20 ? '1' : '0'), \
+  (byte & 0x10 ? '1' : '0'), \
+  (byte & 0x08 ? '1' : '0'), \
+  (byte & 0x04 ? '1' : '0'), \
+  (byte & 0x02 ? '1' : '0'), \
+  (byte & 0x01 ? '1' : '0')
+
+typedef union IntChar {
+    int x;
+    char bytes[4];
+} IntChar;
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdarg.h>
-
-#define DEBUG printf("file %s; line %d\n", __FILE__, __LINE__);
-#define FAIL_OUT DEBUG exit(EXIT_FAILURE);
-#define MALLOC_FAIL printf("!_malloc failed_!\n"); FAIL_OUT
-#define EMPTY_OR_NULL printf("this data structure doesn't have a positive integer value as its size, or the pointer to it isn't valid\n");
 
 #endif //Y2_C_TOOLBOX_H
