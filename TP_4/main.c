@@ -63,6 +63,17 @@ int main() {
     fillIntArrRdm(T, N);
     showIntArr(T, N);
 
+    printf("sort with greaterThan :");
+    qsort(T, N, sizeof(int), &greaterThanBis);
+    showIntArr(T, N);
+
+    printf("sort with lessThan :");
+    qsort(T, N, sizeof(int), &lessThanBis);
+    showIntArr(T, N);
+
+    printf("sort with evenAboveUneven :");
+    qsort(T, N, sizeof(int), &evenAboveUnevenBis);
+    showIntArr(T, N);
 
     return 0;
 }

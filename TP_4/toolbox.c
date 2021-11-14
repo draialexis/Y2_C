@@ -10,7 +10,7 @@ void showIntArr(int *T, int n) {
         printf("%d", T[i]);
         if (i < n - 1) { printf(", "); }
     }
-    printf("]");
+    printf("]\n");
 }
 
 void fillIntArrRdm(int *T, int n) {
