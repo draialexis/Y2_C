@@ -35,14 +35,14 @@ add_executable(
 #        TP_2/tp2ex8.h
 #        TP_2/tp2ex9.h
 
-        TP_3
-        TP_3/main.c
-        TP_3/toolbox.c
-        TP_3/ex1/tp3ex1.c
-        TP_3/ex2/tp3ex2.c
-        TP_3/ex3/tp3ex3.c
-        TP_3/ex4/tp3ex4.c
-        TP_3/ex5/tp3ex5.c
+#        TP_3
+#        TP_3/main.c
+#        TP_3/toolbox.c
+#        TP_3/ex1/tp3ex1.c
+#        TP_3/ex2/tp3ex2.c
+#        TP_3/ex3/tp3ex3.c
+#        TP_3/ex4/tp3ex4.c
+#        TP_3/ex5/tp3ex5.c
 
 #        TP_4
 #        TP_4/main.c
@@ -50,4 +50,8 @@ add_executable(
 #        TP_4/ex3/tp4ex3.c
 #        TP_4/ex4/tp4ex4.c
 #        TP_4/ex5/tp4ex5.c
+
+        toolbox
+        toolbox/toolbox.c
+        toolbox/main.c
 )
