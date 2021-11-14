@@ -7,8 +7,11 @@
 #include "ex4/tp4ex4.h"
 #include "ex5/tp4ex5.h"
 
+#define N 8
 
 int main() {
+    time_t t;
+    srand((unsigned) time(&t));
     //1)
     IntChar a;
     a.x = 13;// largest -> 00000000 00000000 00000000 00001101 <- smallest
@@ -39,6 +42,27 @@ int main() {
     c.x = 271;
     printIntAsHexBytes(c);
     printf("\n");
+
+    //4)
+
+    int res;
+
+    for (int i = 0; i < 5; ++i) {
+        for (int j = i; j < 5; ++j) {
+            res = isACompThanB(&greaterThan, i, j);
+            printf("%d > %d?: %d\n", i, j, res);
+            res = isACompThanB(&lessThan, i, j);
+            printf("%d < %d?: %d\n", i, j, res);
+            res = isACompThanB(&evenAboveUneven, i, j);
+            printf("%d 'more even than' %d?: %d\n", i, j, res);
+        }
+    }
+
+    //5)
+    int T[N];
+    fillIntArrRdm(T, N);
+    showIntArr(T, N);
+
 
     return 0;
 }
