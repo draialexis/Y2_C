@@ -13,7 +13,7 @@ int main() {
     IntChar a;
     a.x = 13;// largest -> 00000000 00000000 00000000 00001101 <- smallest
     for (int i = 0; i < sizeof(int); ++i) {
-        printf("\nbyte %d: "BYTE_TO_BINARY_PATTERN, i + 1, BYTE_TO_BINARY(a.bytes[i]));
+        printf("\nbyte %d as bin: "BYTE_TO_BINARY_PATTERN, i + 1, BYTE_TO_BINARY(a.bytes[i]));
     }
 
     //// least significant byte first => little-endianness
@@ -22,7 +22,7 @@ int main() {
     IntChar b;
     b.x = -5;
     for (int i = 0; i < sizeof(int); ++i) {
-        printf("\nbyte %d: "BYTE_TO_BINARY_PATTERN, i + 1, BYTE_TO_BINARY(b.bytes[i]));
+        printf("\nbyte %d as bin: "BYTE_TO_BINARY_PATTERN, i + 1, BYTE_TO_BINARY(b.bytes[i]));
     }
     printf("\n");
 
@@ -35,8 +35,9 @@ int main() {
      */
 
     //3)
-
-    printIntAsHexBytes(a);
+    IntChar c;
+    c.x = 271;
+    printIntAsHexBytes(c);
     printf("\n");
 
     return 0;
