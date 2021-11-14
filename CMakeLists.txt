@@ -47,4 +47,6 @@ add_executable(
         TP_4/main.c
         TP_4/toolbox.c
         TP_4/ex3/tp4ex3.c
+        TP_4/ex4/tp4ex4.c
+        TP_4/ex5/tp4ex5.c
 )

@@ -4,6 +4,8 @@
 
 #include "toolbox.h"
 #include "ex3/tp4ex3.h"
+#include "ex4/tp4ex4.h"
+#include "ex5/tp4ex5.h"
 
 
 int main() {

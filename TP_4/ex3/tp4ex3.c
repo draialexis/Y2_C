@@ -3,7 +3,6 @@
 //
 
 #include "../toolbox.h"
-#include "tp4ex3.h"
 
 void printIntAsHexBytes(IntChar x) {
     for (int i = 0; i < sizeof(int); ++i) {
