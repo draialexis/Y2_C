@@ -19,14 +19,6 @@ typedef char *str;
 #define MALLOC_FAIL printf("!_malloc failed_!\n"); FAIL_OUT
 #define EMPTY_OR_NULL printf("this data structure doesn't have a positive integer value as its size, or the pointer to it isn't valid\n");
 
-#define MAX(A, B) ({ \
-                    typeof(A) _a = (A); \
-                    typeof(B) _b = (B); \
-                    _a > _b ? _a : _b;  \
-                    })
-
-//#define MAX(A, B) (A > B ? A : B)
-
 void showStrArr(str *arr, int n);
 
 void checkFopen(FILE *f, str f_name);

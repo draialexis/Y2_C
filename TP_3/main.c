@@ -3,6 +3,7 @@
 #include "ex2/tp3ex2.h"
 #include "ex3/tp3ex3.h"
 #include "ex4/tp3ex4.h"
+#include "ex5/tp3ex5.h"
 
 int main(int argc, char *argv[]) {
     //1)
@@ -49,7 +50,6 @@ int main(int argc, char *argv[]) {
 ////            _a > _b ? _a : _b;
 ////        });
 ////    }
-
         return 0;
     }
 }
