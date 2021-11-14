@@ -6,7 +6,7 @@
 
 void printIntAsHexBytes(IntChar x) {
     for (int i = 0; i < sizeof(int); ++i) {
-        printf("\nbyte %d as hex: %02hhx", i + 1, x.bytes[i]);
+        printf("byte %d as hex: %02hhx\n", i + 1, x.bytes[i]);
     }
 }
 
