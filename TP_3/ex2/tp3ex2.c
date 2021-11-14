@@ -39,12 +39,12 @@ str *getIntsFromStr(str input, int *count) {
     if (res == NULL) {
         MALLOC_FAIL
     }
-    for (int i = 0; i < *count; ++i) {
+    for (int i = 0; i < *count; i++) {
         res[i] = mkStr(64);
     }
     int j = 0;
 
-    for (int i = 0; i < *count; ++i) {
+    for (int i = 0; i < *count; i++) {
         while (j < n) {
             int isMinus = strcmp(num, "-") == 0 ? 1 : 0;
             char ch = input[j];

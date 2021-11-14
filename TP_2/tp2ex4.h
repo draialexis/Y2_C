@@ -15,7 +15,7 @@ void copyArray(char *f_name) {
     if (T == NULL) {
         MALLOC_FAIL
     }
-    for (int i = 0; i < N; ++i) {
+    for (int i = 0; i < N; i++) {
         T[i] = i;
     }
 

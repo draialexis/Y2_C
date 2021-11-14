@@ -15,7 +15,7 @@ int main() {
     printf("\n==========ex1==========\n\n");
     IntChar a;
     a.x = 13;// largest -> 00000000 00000000 00000000 00001101 <- smallest
-    for (int i = 0; i < sizeof(int); ++i) {
+    for (int i = 0; i < sizeof(int); i++) {
         printf("byte %d as bin: "BYTE_TO_BINARY_PATTERN"\n", i + 1, BYTE_TO_BINARY(a.bytes[i]));
     }
 
@@ -23,7 +23,7 @@ int main() {
     printf("\n==========ex2==========\n\n");
     IntChar b;
     b.x = -5;
-    for (int i = 0; i < sizeof(int); ++i) {
+    for (int i = 0; i < sizeof(int); i++) {
         printf("byte %d as bin: "BYTE_TO_BINARY_PATTERN"\n", i + 1, BYTE_TO_BINARY(b.bytes[i]));
     }
 
@@ -44,8 +44,8 @@ int main() {
 
     int res;
 
-    for (int i = 0; i < 5; ++i) {
-        for (int j = i; j < 5; ++j) {
+    for (int i = 0; i < 5; i++) {
+        for (int j = i; j < 5; j++) {
             res = isACompThanB(&greaterThan, i, j);
             printf("%d > %d?: %d\n", i, j, res);
             res = isACompThanB(&lessThan, i, j);

@@ -6,7 +6,7 @@
 
 void showIntArr(int *T, int n) {
     printf("[");
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         printf("%d", T[i]);
         if (i < n - 1) { printf(", "); }
     }
@@ -14,7 +14,7 @@ void showIntArr(int *T, int n) {
 }
 
 void fillIntArrRdm(int *T, int n) {
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         T[i] = (rand() % 21) - 10;
     }
 }

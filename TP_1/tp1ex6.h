@@ -8,7 +8,7 @@
 // it was tempting to "divide and rule", create a modular ensemble of small, simple functions
 // but the instructions said "_une_ fonction", so here we go
 
-int *createRdmPerm(int n) {
+int *mkRdmPerm(int n) {
     if (n > 0) {
         int *arr = malloc(
                 sizeof(int) * n); // we have the size of the array as a parameter, not a constant. Perfect for malloc
