@@ -396,6 +396,7 @@ void showList(List list) {
         }
     }
 }
+
 //=======================================TP2=================================================
 
 void checkFopen(FILE *f) {
@@ -409,9 +410,10 @@ void checkFopen(FILE *f) {
 void copyOrAppendFile(char *f1_name, char *f2_name, ...) {
     int c;
 
-    FILE *f1 = fopen(f1_name, "r");
+    FILE *f1 = NULL;
+    f1 = fopen(f1_name, "r");
     checkFopen(f1);
-    FILE *f2;
+    FILE *f2 = NULL;
 
     va_list l;
     va_start(l, f2_name); //f2_name is irrelevant here
@@ -445,10 +447,12 @@ void showDiff(char *f1_name, char *f2_name) {
     int char_num = 1;
     int line_num = 1;
 
-    FILE *f1 = fopen(f1_name, "r");
+    FILE *f1 = NULL;
+    f1 = fopen(f1_name, "r");
     checkFopen(f1);
 
-    FILE *f2 = fopen(f2_name, "r");
+    FILE *f2 = NULL;
+    f2 = fopen(f2_name, "r");
     checkFopen(f2);
 
     while (1) {
@@ -477,7 +481,8 @@ void showDiff(char *f1_name, char *f2_name) {
 
 void removeVowels(char *f_name) {
     int c;
-    FILE *f = fopen(f_name, "r");
+    FILE *f = NULL;
+    f = fopen(f_name, "r");
     checkFopen(f);
     char *b = mkStr(BUFFER_SIZE);
 
@@ -535,25 +540,26 @@ void permuteString(char *txt_f_name, char *res_f_name, const int *perm, int n) {
 }
 
 int *findPerm(char *perm_f_name, int *nPtr) {
-    FILE *fp_perm = fopen(perm_f_name, "r");
-    checkFopen(fp_perm);
+    FILE *f_perm = NULL;
+    f_perm = fopen(perm_f_name, "r");
+    checkFopen(f_perm);
     *nPtr = 0;
 
     int tmpVal = 0;
-    while (!feof(fp_perm)) {
-        fscanf(fp_perm, "%d", &tmpVal);
+    while (!feof(f_perm)) {
+        fscanf(f_perm, "%d", &tmpVal);
         *nPtr += 1;
     }
 
     int *perm = mkIntArr(*nPtr);
-    fseek(fp_perm, 0, SEEK_SET);
+    fseek(f_perm, 0, SEEK_SET);
 
     for (int i = 0; i < *nPtr; i++) {
-        fscanf(fp_perm, "%d", &tmpVal);
+        fscanf(f_perm, "%d", &tmpVal);
         perm[i] = tmpVal;
     }
 
-    fclose(fp_perm);
+    fclose(f_perm);
     return perm;
 }
 
@@ -583,9 +589,11 @@ void decode(char *txt_f_name, char *perm_f_name, char *res_f_name) {
 }
 
 void caesar(char *txt_f_name, char *txt_res_name, int n) {
-    FILE *f1 = fopen(txt_f_name, "r");
+    FILE *f1 = NULL;
+    f1 = fopen(txt_f_name, "r");
     checkFopen(f1);
-    FILE *f2 = fopen(txt_res_name, "w+");
+    FILE *f2 = NULL;
+    f2 = fopen(txt_res_name, "w+");
     checkFopen(f2);
     int c;
 
@@ -607,27 +615,54 @@ void caesar(char *txt_f_name, char *txt_res_name, int n) {
     }
 }
 
-//void writeListToFile(List l) {
-//    int n = listlen(l);
-//    FILE *f = fopen("ex8_res.txt", "w+");
-//    checkFopen(f);
-//    char *str = mkStr(BFR);
-//    char *tmp = mkStr(32);
-//    sprintf(str, "list: [%d] ", n);
-//
-//    Element *currentPtr = l.head_;
-//
-//    for (int i = 0; i < n; i++) {
-//        sprintf(tmp, "%d", currentPtr->val_);
-//        strcat(str, tmp);
-//        currentPtr = currentPtr->next_;
-//        if (i != n - 1) {
-//            strcat(str, ", ");
-//        }
-//    }
-//    fwrite(str, sizeof(char), strlen(str), f);
-//    fclose(f);
-//}
+void writeListToFile(List l, char *txt_res_name) {
+    int n = listlen(l);
+    FILE *f = NULL;
+    f = fopen(txt_res_name, "w+");
+    checkFopen(f);
+
+    char *tmp = mkStr(32);//large enough for any int..?
+
+    char *str = mkStr(BUFFER_SIZE);//large, for a long-ish list
+    sprintf(str, "list: [%d] ", n);
+
+    Element *currentPtr = l.head_;
+
+    for (int i = 0; i < n; i++) {
+        sprintf(tmp, "%d", currentPtr->val_);
+        strcat(str, tmp);
+        currentPtr = currentPtr->next_;
+        if (i != n - 1) {
+            strcat(str, ", ");
+        }
+    }
+    fwrite(str, sizeof(char), strlen(str), f);
+    fclose(f);
+}
+
+void getListFromFile(char *txt_f_name, List *lPtr) {
+    FILE *f = NULL;
+    f = fopen(txt_f_name, "r");
+    checkFopen(f);
+
+    fseek(f, 10, SEEK_SET);//start after the preambule
+    char c;
+    char *tmp = mkStr(32);
+
+    while (!feof(f)) {
+        c = (char) fgetc(f);
+        if (c != ',') {
+            strcat(tmp, &c);
+        } else {
+            fseek(f, 1, SEEK_CUR);// skip the comma and whitespace
+            addToList(lPtr, strtol(tmp, NULL, 10), 'e');
+            sprintf(tmp, "%c", '\0');
+        }
+    }
+    addToList(lPtr, strtol(tmp, NULL, 10), 'e');
+    fclose(f);
+}
+
 //=======================================TP3=================================================
 
 

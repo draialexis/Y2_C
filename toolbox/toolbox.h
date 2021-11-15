@@ -315,6 +315,20 @@ void decode(char *txt_f_name, char *perm_f_name, char *res_f_name);
  */
 void caesar(char *txt_f_name, char *txt_res_name, int n);
 
+/**
+ * writes a List's contents into a text file of a given name, folowing the format: "list: [_size_] a, b, c, d"
+ * @param l the List
+ * @param txt_res_name the resulting file's name
+ */
+void writeListToFile(List l, char *txt_res_name);
+
+/**
+ * populates a given (presumably empty) List based on the contents of a text file, if it is formatted as follows:
+ * "list: [_size_] a, b, c, d"
+ * @param txt_f_name the name of the given file
+ * @param lPtr a pointer to the given List
+ */
+void getListFromFile(char *txt_f_name, List *lPtr)
 //=======================================TP3=================================================
 
 //=======================================TP4=================================================
