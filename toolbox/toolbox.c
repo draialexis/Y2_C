@@ -4,6 +4,8 @@
 
 #include "toolbox.h"
 
+//=======================================TP1=================================================
+
 int randInRange(int min, int max) {
     if (min == max) {
         DEBUG
@@ -121,7 +123,7 @@ int isPermutation(const int *arr, int n) {
     for (int i = 0; i < n; i++) {
         if (i > 0) {
             if (count != 1) {
-                printf("element: %d wasn't found\n", i - 1);
+                printf("not a permutation: element %d wasn't found\n", i - 1);
                 return 0;
             }
         }
@@ -130,13 +132,13 @@ int isPermutation(const int *arr, int n) {
 
         for (int j = 0; j < n; j++) {
             if (arr[j] >= n || arr[j] < 0) {
-                printf("element: %d out of bounds\n", arr[j]);
+                printf("not a permutation: element %d out of bounds\n", arr[j]);
                 return 0;
             }
             if (arr[j] == i) {
                 count++;
                 if (count > 1) {
-                    printf("element: %d appears more than once\n", arr[j]);
+                    printf("not a permutation: element %d appears more than once\n", arr[j]);
                     return 0;
                 }
             }
@@ -169,7 +171,7 @@ int *mkRdmPerm(int n) {
     return arr;
 }
 
-char *permuteString(const char *orig, const int *arr, int n) {
+char *mkStrPerm(const char *orig, const int *arr, int n) {
     if (strlen(orig) < 1 || orig == NULL || arr == NULL) {
         EMPTY_OR_NULL
         return NULL;
@@ -319,3 +321,316 @@ int **pascalsTriangle(int n) {
     }
     return res;
 }
+
+List createList() {
+    List *list = NULL;
+    list = (List *) malloc(sizeof(List));
+    if (list == NULL) { MALLOC_FAIL }
+    list->nb_elements_ = 0;
+    list->head_ = NULL;
+    list->tail_ = NULL;
+    return *list;
+}
+
+int listlen(List list) {
+    return list.nb_elements_;
+}
+
+Element *mkElement(int val) {
+    Element *res = NULL;
+    res = (Element *) malloc(sizeof(Element));
+    if (res == NULL) { MALLOC_FAIL }
+    res->next_ = NULL;
+    res->prev_ = NULL;
+    res->val_ = val;
+    return res;
+}
+
+int addToList(List *listPtr, int val, char mode) {
+    Element *element = mkElement(val);
+
+    if (listPtr->head_ == NULL && listPtr->tail_ == NULL) {
+        listPtr->head_ = element;
+        listPtr->tail_ = element;
+    } else if (listPtr->head_ == NULL || listPtr->tail_ == NULL) {
+        EMPTY_OR_NULL
+        printf("the list has a tail and no head, or vice versa...\n");
+        return 0;
+    } else {
+        if (mode == 's') {
+            listPtr->head_->prev_ = element;
+            element->next_ = listPtr->head_;
+            listPtr->head_ = element;
+        } else {
+            if (mode != 'e') { printf("couldn't understand mose; using ADD_TO_END by default"); }
+            listPtr->tail_->next_ = element;
+            element->prev_ = listPtr->tail_;
+            listPtr->tail_ = element;
+        }
+    }
+
+    listPtr->nb_elements_ += 1;
+    return 1;
+}
+
+int endVal_list(List list) {
+    return list.tail_->val_;
+}
+
+int startVal_list(List list) {
+    return list.head_->val_;
+}
+
+void showList(List list) {
+    int n = listlen(list);
+    printf("list: {<x ");
+    Element *currentPtr = list.head_;
+
+    for (int i = 0; i < n; i++) {
+        printf("%d", currentPtr->val_);
+        currentPtr = currentPtr->next_;
+        if (i == n - 1) {
+            printf(" x>}\n");
+        } else {
+            printf(" <-> ");
+        }
+    }
+}
+//=======================================TP2=================================================
+
+void checkFopen(FILE *f) {
+    if (f == NULL) {
+        EMPTY_OR_NULL
+        perror("error while opening file");
+        FAIL_OUT
+    }
+}
+
+void copyOrAppendFile(char *f1_name, char *f2_name, ...) {
+    int c;
+
+    FILE *f1 = fopen(f1_name, "r");
+    checkFopen(f1);
+    FILE *f2;
+
+    va_list l;
+    va_start(l, f2_name); //f2_name is irrelevant here
+    int mode = va_arg(l, int);
+    va_end(l);
+
+    if (mode == 'a') {
+        f2 = fopen(f2_name, "a+");
+        printf("using 'APPEND' mode\n");
+    } else if (mode == 'c') {
+        f2 = fopen(f2_name, "w+");
+        printf("using 'COPY' mode\n");
+    } else {
+        printf("couldn't understand instructions: using 'APPEND' mode\n");
+        f2 = fopen(f2_name, "a+");
+    }
+    checkFopen(f2);
+
+    while (1) {
+        if (feof(f1) || feof(f2)) { break; }
+        c = fgetc(f1);
+        if (c == EOF) { break; }
+        fputc(c, f2);
+    }
+    fclose(f1);
+    fclose(f2);
+}
+
+void showDiff(char *f1_name, char *f2_name) {
+    int c1, c2;
+    int char_num = 1;
+    int line_num = 1;
+
+    FILE *f1 = fopen(f1_name, "r");
+    checkFopen(f1);
+
+    FILE *f2 = fopen(f2_name, "r");
+    checkFopen(f2);
+
+    while (1) {
+        c1 = fgetc(f1);
+        c2 = fgetc(f2);
+        if (c1 != c2) {
+            printf("difference detected at line %d, char %d:\n%c != %c\n", line_num, char_num, c1, c2);
+            break;
+        }
+        if (feof(f1) && feof(f2)) {
+            printf("perfect copy\n");
+            break;
+        }
+        if (c1 < 0 || c1 > 255 || c2 < 0 || c2 > 255) {
+            printf("non-char detected at line %d, char %d\n", line_num, char_num);
+            break;
+        }
+        if (c1 == '\n') {
+            line_num++;
+        }
+        char_num++;
+    }
+    fclose(f1);
+    fclose(f2);
+}
+
+void removeVowels(char *f_name) {
+    int c;
+    FILE *f = fopen(f_name, "r");
+    checkFopen(f);
+    char *b = mkStr(BUFFER_SIZE);
+
+    while (1) {
+        c = fgetc(f);
+        if (feof(f)) {
+            break;
+        }
+        if (c != 'a' && c != 'A' &&
+            c != 'e' && c != 'E' &&
+            c != 'i' && c != 'I' &&
+            c != 'o' && c != 'O' &&
+            c != 'u' && c != 'U' &&
+            c != 'y' && c != 'Y') {
+            sprintf(b + strlen(b), "%c", c);
+        }
+    }
+    fclose(f);
+    f = fopen(f_name, "w+");
+    fputs(b, f);
+    fclose(f);
+}
+
+void permSubStr(char *str, const int *perm, int n) {
+    char *tmp = mkStr(n);
+    for (int i = 0; i < n; i++) {
+        tmp[perm[i]] = str[i];
+    }
+    for (int i = 0; i < n; i++) {
+        str[i] = tmp[i];
+    }
+    free(tmp);
+}
+
+void permuteString(char *txt_f_name, char *res_f_name, const int *perm, int n) {
+    if (strlen(txt_f_name) < 1 || txt_f_name == NULL || perm == NULL) { EMPTY_OR_NULL }
+
+    FILE *encoded = fopen(res_f_name, "w+");
+    checkFopen(encoded);
+    FILE *orig = fopen(txt_f_name, "r");
+    checkFopen(orig);
+    int read_count;
+    char *bfr = mkStr(n);
+
+    do {
+        read_count = (int) fread(bfr, sizeof(char), n, orig);
+        if (read_count == n) {
+            permSubStr(bfr, perm, n);
+        }
+        fwrite(bfr, sizeof(char), read_count, encoded);
+    } while (read_count != 0);
+
+    fclose(encoded);
+    fclose(orig);
+}
+
+int *findPerm(char *perm_f_name, int *nPtr) {
+    FILE *fp_perm = fopen(perm_f_name, "r");
+    checkFopen(fp_perm);
+    *nPtr = 0;
+
+    int tmpVal = 0;
+    while (!feof(fp_perm)) {
+        fscanf(fp_perm, "%d", &tmpVal);
+        *nPtr += 1;
+    }
+
+    int *perm = mkIntArr(*nPtr);
+    fseek(fp_perm, 0, SEEK_SET);
+
+    for (int i = 0; i < *nPtr; i++) {
+        fscanf(fp_perm, "%d", &tmpVal);
+        perm[i] = tmpVal;
+    }
+
+    fclose(fp_perm);
+    return perm;
+}
+
+void encode(char *txt_f_name, char *perm_f_name, char *res_f_name) {
+    int n;
+    int *perm = findPerm(perm_f_name, &n);
+    if (isPermutation(perm, n)) {
+        permuteString(txt_f_name, res_f_name, perm, n);
+    } else {
+        printf("the sequence of numbers was evaluated as _not a permutation_\n");
+    }
+}
+
+void decode(char *txt_f_name, char *perm_f_name, char *res_f_name) {
+
+    int n;
+    int *perm = findPerm(perm_f_name, &n);
+    int *deperm = mkIntArr(n);
+    if (isPermutation(perm, n)) {
+        for (int i = 0; i < n; i++) {
+            deperm[perm[i]] = i;
+        }
+        permuteString(txt_f_name, res_f_name, deperm, n);
+    } else {
+        printf("the original sequence of numbers was evaluated as _not a permutation_\n");
+    }
+}
+
+void caesar(char *txt_f_name, char *txt_res_name, int n) {
+    FILE *f1 = fopen(txt_f_name, "r");
+    checkFopen(f1);
+    FILE *f2 = fopen(txt_res_name, "w+");
+    checkFopen(f2);
+    int c;
+
+    if (n < 0 || n > 255) {
+        printf("n: %d was changed to ", n);
+        n = abs(n % 255);
+        printf("n: %d\n", n);
+    }
+
+    while (1) {
+        c = fgetc(f1);
+        if (feof(f1)) {
+            break;
+        }
+        if (c < 0 || c > 255 || fputc((c + n) % 255, f2) == EOF) {
+            printf("non-char detected or fputc failure\n");
+            FAIL_OUT
+        }
+    }
+}
+
+//void writeListToFile(List l) {
+//    int n = listlen(l);
+//    FILE *f = fopen("ex8_res.txt", "w+");
+//    checkFopen(f);
+//    char *str = mkStr(BFR);
+//    char *tmp = mkStr(32);
+//    sprintf(str, "list: [%d] ", n);
+//
+//    Element *currentPtr = l.head_;
+//
+//    for (int i = 0; i < n; i++) {
+//        sprintf(tmp, "%d", currentPtr->val_);
+//        strcat(str, tmp);
+//        currentPtr = currentPtr->next_;
+//        if (i != n - 1) {
+//            strcat(str, ", ");
+//        }
+//    }
+//    fwrite(str, sizeof(char), strlen(str), f);
+//    fclose(f);
+//}
+//=======================================TP3=================================================
+
+
+
+//=======================================TP4=================================================
+

@@ -5,7 +5,7 @@
 #ifndef Y2_C_TP2EX3_H
 #define Y2_C_TP2EX3_H
 
-#define BUFFER_SIZE 32768 //~8000 chars
+#define BUFFER_SIZE 32768 //~4000 chars
 
 void removeVowels(char *f_name) {
     FILE *fp = fopen(f_name, "r");

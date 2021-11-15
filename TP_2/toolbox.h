@@ -38,7 +38,6 @@ void checkFopen(FILE *fileName) {
     }
 }
 
-
 int isPermutation(const int *arr, int n) {
     if (n > 0 && arr != NULL) {
 

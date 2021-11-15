@@ -10,14 +10,45 @@
 #include <time.h>
 #include <string.h>
 #include <errno.h>
+#include <stdarg.h>
+#include <ctype.h>
 
+/**
+ * typedef-ed function pointer for a function that accepts to ints and returns an int
+ */
+typedef int (*compPtr)(int, int);
+
+/**
+ * @properties next_ a pointer to a next Element
+ * @properties prev_ a pointer to a previous Element
+ * @properties val_ an int value
+ */
+typedef struct LElement {
+    struct LElement *next_;
+    struct LElement *prev_;
+    int val_;
+} Element;
+
+/**
+ * @properties nb_elements_ the number of Elements in the List
+ * @properties head_ a pointer to the List's first Element
+ * @properties tail_ a pointer to the List's last Element
+ */
+typedef struct LList {
+    int nb_elements_;
+    Element *head_;
+    Element *tail_;
+} List;
 
 #define DEBUG printf("file %s; line %d\n", __FILE__, __LINE__);
 #define FAIL_OUT DEBUG exit(EXIT_FAILURE);
 #define MALLOC_FAIL printf("!_malloc failed_!\n"); FAIL_OUT
 #define EMPTY_OR_NULL printf("this data structure doesn't have a positive int value as its size, or the pointer to it isn't valid\n");
 
+#define BUFFER_SIZE 32768 //~4000 chars, 1000 ints, 500 long longs...
+
 //=======================================TP1=================================================
+
 /**
  * finds a random int in a range
  * @param min the lower bound
@@ -95,15 +126,15 @@ int isPermutation(const int *arr, int n);
 int *mkRdmPerm(int n);
 
 /**
- * makes a string that is a permutation of a previous string, based on a permutation array of ints
+ * makes a string that is a permutation of a previous string, based on a same-size permutation array of ints
  * (a permutation contains ints between 0 and n-1, and no same int twice)
  * @param orig the original string
  * @param arr the permutation array
- * @param n the size of the permutation array
+ * @param n the size of the permutation array and of the string
  * @return a pointer to a new string, based on the original one and the permutation array ===============
  * ("ftw" and [201] -> "__f" -> "t_f" -> "twf")
  */
-char *permuteString(const char *orig, const int *arr, int n);
+char *mkStrPerm(const char *orig, const int *arr, int n);
 
 /**
  * prints an 2D array of floats, as a matrix, to the console
@@ -153,7 +184,136 @@ void freeMat_f(float **mat, int rows, int cols);
  */
 int **pascalsTriangle(int n);
 
+/**
+ * makes an empty list
+ * @return a pointer to the list
+ */
+List createList();
+
+/**
+ * finds the length of a list
+ * @param list the list
+ * @return the length of the list
+ */
+int listlen(List list);
+
+/**
+ * makes an Element with null next and previous properties
+ * @param val the value to be contained in the Element
+ * @return a pointer to the created Element
+ */
+Element *mkElement(int val);
+
+/**
+ * adds an Element with a given value to the end or to the beginning of a given List, depending on the chosen mode
+ * @param listPtr
+ * @param val
+ * @param mode the chosen mode: 'e' for end (default), 's' for start
+ * @return 1 if successful, 0 if not
+ */
+int addToList(List *listPtr, int val, char mode);
+
+/**
+ * finds the value in the last Element of a given List
+ * @param list the List
+ * @return the int value of the Element
+ */
+int endVal_list(List list);
+
+/**
+ * finds the value in the first Element of a given List
+ * @param list the List
+ * @return the int value of the Element
+ */
+int startVal_list(List list);
+
+/**
+ * prints a List's content to the console
+ * @param list the List
+ */
+void showList(List list);
+
 //=======================================TP2=================================================
+
+/**
+ * checks if a file was open successfully; exits with error if not
+ * @param f a pointer to the FILE
+ */
+void checkFopen(FILE *f);
+
+/**
+ * copies an existing file's contents into another file, or appends an existing file's contents onto another file's
+ * @param f1_name the name of the source file
+ * @param f2_name the name of the destination file
+ * @param mode 'c' for copying, or 'a' for appending (default)
+ */
+void copyOrAppendFile(char *f1_name, char *f2_name, ...);
+
+/**
+ * prints to the console the first difference found between two files (line and char number)
+ * @param f1_name the name of a file
+ * @param f2_name the name of another file
+ */
+void showDiff(char *f1_name, char *f2_name);
+
+/**
+ * removes all vowels from a given file (diacritics not covered)
+ * @param f_name the file name
+ */
+void removeVowels(char *f_name);
+
+/**
+ * modifies a string in place, using a same-size permutation array of ints
+ * @param str the string to be modified
+ * @param perm the permutation array
+ * @param n the size of the permutation array and of the string
+ */
+void permSubStr(char *str, const int *perm, int n);
+
+/**
+ * makes a text file with a given name, that is a permutation of an original text file, using a permutation array of
+ * ints and its size, and repeating it if it is shorter than the given text
+ * @param txt_f_name the name of original text file
+ * @param res_f_name the name of resulting text file
+ * @param perm the permutation array
+ * @param n the size of the permutation array
+ */
+void permuteString(char *txt_f_name, char *res_f_name, const int *perm, int n);
+
+/**
+ * makes a permutation array of ints from a text file (supposed to contain a permutation: ints separated by spaces
+ * , like "2 0 1")
+ * @param perm_f_name the name of the file containing the permutation
+ * @param nPtr a pointer to an int
+ * @return a permutation array of ints
+ * @side_effect changes the value that nPtr points to, to the size of the created array
+ */
+int *findPerm(char *perm_f_name, int *nPtr);
+
+/**
+ * makes a text file with a given name, that is a permutation of an original text file, using a permutation sequence
+ * from another file text, verifying the validity of the permutation, and repeating it if it is shorter than the given text
+ * @param txt_f_name the name of original text file
+ * @param perm_f_name the name of the permutation text file
+ * @param res_f_name the name of resulting text file
+ */
+void encode(char *txt_f_name, char *perm_f_name, char *res_f_name);
+
+/**
+ * decodes a file that was encoded with the encode function, using the same permutation array if ints as key
+ * @param txt_f_name the name of the encoded text file
+ * @param perm_f_name the name of the permutation text file
+ * @param res_f_name the name of the resulting text file
+ */
+void decode(char *txt_f_name, char *perm_f_name, char *res_f_name);
+
+/**
+ * makes a text file with a given name, that is a caesar's cypher of an original text file, using an int to determine the shift
+ * @param txt_f_name the name of the original text file
+ * @param txt_res_name the name of the enciphered text file
+ * @param n the desired shift
+ */
+void caesar(char *txt_f_name, char *txt_res_name, int n);
 
 //=======================================TP3=================================================
 

@@ -52,8 +52,8 @@ int *findPerm(char *perm_f_name, int *nPtr) {
     FILE *fp_perm = fopen(perm_f_name, "r");
     checkFopen(fp_perm);
 
-    char *txt_perm = (char *) malloc(sizeof(char) * BFR);
-    sprintf(txt_perm, "%c", '\0');
+    char *txt_perm = mkStr(BFR);
+    *nPtr = 0;
 
     int tmpVal = 0;
     while (!feof(fp_perm)) {
@@ -73,7 +73,7 @@ int *findPerm(char *perm_f_name, int *nPtr) {
 }
 
 void encode(char *txt_f_name, char *perm_f_name) {
-    int n = 0;
+    int n;
     int *perm = findPerm(perm_f_name, &n);
     if (isPermutation(perm, n)) {
         permuteString(txt_f_name, "encoded.txt", perm, n);
