@@ -227,8 +227,6 @@ float **mkMat_f(int rows, int cols) {
     }
 }
 
-#define GET_INPUT_FILL_MAT_F  printf("row: %d | col: %d | >", i + 1, j + 1); fgets(input, 20, stdin); x = strtof(input, &endptr); printf("%f\n", x);
-
 void fillMat_f(float **mat, int rows, int cols) {
     if (rows < 1 || cols < 1 || mat == NULL) {
         EMPTY_OR_NULL
@@ -347,6 +345,11 @@ Element *mkElement(int val) {
 }
 
 int addToList(List *listPtr, int val, char mode) {
+    if (listPtr == NULL) {
+        EMPTY_OR_NULL
+        FAIL_OUT
+    }
+
     Element *element = mkElement(val);
 
     if (listPtr->head_ == NULL && listPtr->tail_ == NULL) {
@@ -389,20 +392,17 @@ void showList(List list) {
     for (int i = 0; i < n; i++) {
         printf("%d", currentPtr->val_);
         currentPtr = currentPtr->next_;
-        if (i == n - 1) {
-            printf(" x>}\n");
-        } else {
-            printf(" <-> ");
-        }
+        if (i < n - 1) { printf(" <-> "); }
     }
+    printf(" x>}\n");
 }
 
 //=======================================TP2=================================================
 
-void checkFopen(FILE *f) {
+void checkFopen(FILE *f, char *f_name) {
     if (f == NULL) {
         EMPTY_OR_NULL
-        perror("error while opening file");
+        printf("error while opening file %s\n", f_name);
         FAIL_OUT
     }
 }
@@ -412,7 +412,7 @@ void copyOrAppendFile(char *f1_name, char *f2_name, ...) {
 
     FILE *f1 = NULL;
     f1 = fopen(f1_name, "r");
-    checkFopen(f1);
+    checkFopen(f1, f1_name);
     FILE *f2 = NULL;
 
     va_list l;
@@ -430,7 +430,7 @@ void copyOrAppendFile(char *f1_name, char *f2_name, ...) {
         printf("couldn't understand instructions: using 'APPEND' mode\n");
         f2 = fopen(f2_name, "a+");
     }
-    checkFopen(f2);
+    checkFopen(f2, f2_name);
 
     while (1) {
         if (feof(f1) || feof(f2)) { break; }
@@ -449,11 +449,11 @@ void showDiff(char *f1_name, char *f2_name) {
 
     FILE *f1 = NULL;
     f1 = fopen(f1_name, "r");
-    checkFopen(f1);
+    checkFopen(f1, f1_name);
 
     FILE *f2 = NULL;
     f2 = fopen(f2_name, "r");
-    checkFopen(f2);
+    checkFopen(f2, f2_name);
 
     while (1) {
         c1 = fgetc(f1);
@@ -483,7 +483,7 @@ void removeVowels(char *f_name) {
     int c;
     FILE *f = NULL;
     f = fopen(f_name, "r");
-    checkFopen(f);
+    checkFopen(f, f_name);
     char *b = mkStr(BUFFER_SIZE);
 
     while (1) {
@@ -507,6 +507,11 @@ void removeVowels(char *f_name) {
 }
 
 void permSubStr(char *str, const int *perm, int n) {
+    if (str[0] == '\0' || perm == NULL || n < 1) {
+        EMPTY_OR_NULL
+        FAIL_OUT
+    }
+
     char *tmp = mkStr(n);
     for (int i = 0; i < n; i++) {
         tmp[perm[i]] = str[i];
@@ -518,12 +523,15 @@ void permSubStr(char *str, const int *perm, int n) {
 }
 
 void permuteString(char *txt_f_name, char *res_f_name, const int *perm, int n) {
-    if (strlen(txt_f_name) < 1 || txt_f_name == NULL || perm == NULL) { EMPTY_OR_NULL }
+    if (strlen(txt_f_name) < 1 || txt_f_name == NULL || perm == NULL || n < 1) {
+        EMPTY_OR_NULL
+        FAIL_OUT
+    }
 
     FILE *encoded = fopen(res_f_name, "w+");
-    checkFopen(encoded);
+    checkFopen(encoded, res_f_name);
     FILE *orig = fopen(txt_f_name, "r");
-    checkFopen(orig);
+    checkFopen(orig, txt_f_name);
     int read_count;
     char *bfr = mkStr(n);
 
@@ -540,9 +548,14 @@ void permuteString(char *txt_f_name, char *res_f_name, const int *perm, int n) {
 }
 
 int *findPerm(char *perm_f_name, int *nPtr) {
+    if (nPtr == NULL) {
+        EMPTY_OR_NULL
+        return NULL;
+    }
+
     FILE *f_perm = NULL;
     f_perm = fopen(perm_f_name, "r");
-    checkFopen(f_perm);
+    checkFopen(f_perm, perm_f_name);
     *nPtr = 0;
 
     int tmpVal = 0;
@@ -574,7 +587,6 @@ void encode(char *txt_f_name, char *perm_f_name, char *res_f_name) {
 }
 
 void decode(char *txt_f_name, char *perm_f_name, char *res_f_name) {
-
     int n;
     int *perm = findPerm(perm_f_name, &n);
     int *deperm = mkIntArr(n);
@@ -589,12 +601,12 @@ void decode(char *txt_f_name, char *perm_f_name, char *res_f_name) {
 }
 
 void caesar(char *txt_f_name, char *txt_res_name, int n) {
-    FILE *f1 = NULL;
-    f1 = fopen(txt_f_name, "r");
-    checkFopen(f1);
-    FILE *f2 = NULL;
-    f2 = fopen(txt_res_name, "w+");
-    checkFopen(f2);
+    FILE *orig = NULL;
+    orig = fopen(txt_f_name, "r");
+    checkFopen(orig, txt_f_name);
+    FILE *enciphered = NULL;
+    enciphered = fopen(txt_res_name, "w+");
+    checkFopen(enciphered, txt_res_name);
     int c;
 
     if (n < 0 || n > 255) {
@@ -604,11 +616,9 @@ void caesar(char *txt_f_name, char *txt_res_name, int n) {
     }
 
     while (1) {
-        c = fgetc(f1);
-        if (feof(f1)) {
-            break;
-        }
-        if (c < 0 || c > 255 || fputc((c + n) % 255, f2) == EOF) {
+        c = fgetc(orig);
+        if (feof(orig)) { break; }
+        if (c < 0 || c > 255 || fputc((c + n) % 255, enciphered) == EOF) {
             printf("non-char detected or fputc failure\n");
             FAIL_OUT
         }
@@ -619,7 +629,7 @@ void writeListToFile(List l, char *txt_res_name) {
     int n = listlen(l);
     FILE *f = NULL;
     f = fopen(txt_res_name, "w+");
-    checkFopen(f);
+    checkFopen(f, txt_res_name);
 
     char *tmp = mkStr(32);//large enough for any int..?
 
@@ -641,9 +651,14 @@ void writeListToFile(List l, char *txt_res_name) {
 }
 
 void getListFromFile(char *txt_f_name, List *lPtr) {
+    if (lPtr == NULL) {
+        EMPTY_OR_NULL
+        FAIL_OUT
+    }
+
     FILE *f = NULL;
     f = fopen(txt_f_name, "r");
-    checkFopen(f);
+    checkFopen(f, txt_f_name);
 
     fseek(f, 10, SEEK_SET);//start after the preambule
     char c;
@@ -665,6 +680,150 @@ void getListFromFile(char *txt_f_name, List *lPtr) {
 
 //=======================================TP3=================================================
 
+char **getIntsFromStr(char *input, int *count) {
+    if (input == NULL || input[0] == '\0' || count == NULL) {
+        EMPTY_OR_NULL
+        return NULL;
+    }
+
+    int isFirstDigitFound = 0;
+    int isDigitPrev = 0;
+    *count = 0;
+    unsigned long long n = strlen(input);
+
+    //find number of numbers in string
+    for (int i = 0; i < n; i++) {
+        char ch = input[i];
+        if (isdigit(ch)) {
+            if (!isFirstDigitFound) { isFirstDigitFound = 1; }
+            if (i == n - 1) { *count += 1; }
+            isDigitPrev = 1;
+        } else {
+            if (isDigitPrev) {
+                *count += 1;
+                isDigitPrev = 0;
+            }
+        }
+    }
+
+    isFirstDigitFound = 0; // !
+    isDigitPrev = 0; // !
+    int j = 0;
+    int isMinus;
+
+    char *tmp = mkStr(2);//...just one char, pretty much
+    char *num = mkStr(64);//a number; will be appended on
+    char **res = NULL; // an array of strings
+    res = malloc(sizeof(char *) * *count);
+    if (res == NULL) { MALLOC_FAIL }
+    for (int i = 0; i < *count; i++) { res[i] = mkStr(64); }
+
+    for (int i = 0; i < *count; i++) {
+        while (j < n) {
+            if (strcmp(num, "-") == 0) {
+                isMinus = 1;
+            } else {
+                isMinus = 0;
+            }
+
+            char ch = input[j];
+
+            if (isdigit(ch)) { //it's a digit, we add it to our num string in construction
+                if (!isFirstDigitFound) { isFirstDigitFound = 1; }
+                sprintf(tmp, "%c", ch);
+                strcat(num, tmp);
+                isDigitPrev = 1;//we note that we just saw a digit
+                if (j == n - 1) { strcpy(res[i], num); }
+                //it's the last char and it's an digit, we're ready to copy it to the array (no next digit to wait for)
+            } else if (ch == '-') { //it's part of a digit too, but it's the beginning of one.
+                if (isDigitPrev && !isMinus) {
+                    // if we just saw part of an int, we can copy that into the array now
+                    strcpy(res[i], num);
+                    sprintf(num, "%c", ch);//and start our new int
+                    isDigitPrev = 0;
+                    j++;
+                    break;
+                    // we just copied a digit into res[i], we're ready for the next i loop
+                }
+                sprintf(num, "%c", ch);//and start our new int
+                isDigitPrev = 0;
+            } else { // ch is not a digit or a '-',
+                if (isDigitPrev) {
+                    //so the last digit that we just saw was the last part of an int that we can now copy
+                    isDigitPrev = 0;
+                    strcpy(res[i], num);
+                    sprintf(num, "%c", '\0');
+                    j++;
+                    break;
+                } //or we're going through our n-th non-int char
+                sprintf(num, "%c", '\0'); //to purge our num in case of trailing '-'s
+            }
+            j++;
+        }
+    }
+    return res;
+}
+
+void showStrArr(char **arr, int n) {
+    if (n < 1 || arr == NULL) {
+        EMPTY_OR_NULL
+        FAIL_OUT
+    }
+    printf("showing an array of strings\n");
+    int i;
+    printf("[");
+    for (i = 0; i < n; i++) {
+        printf("%s", arr[i]);
+        if (i < n - 1) {
+            printf(",");
+        } else {
+            printf("]\n");
+        }
+    }
+}
+
+void myWc(char *f_name) {
+    FILE *f = NULL;
+    f = fopen(f_name, "r");
+    checkFopen(f, f_name);
+
+    int w = 0;
+    int c = 0;
+    int l = 0;
+    int ch;
+    int isCharPrev;
+
+    while (!feof(f)) {
+        ch = fgetc(f);
+        c++;
+
+        if (isalpha(ch)) {
+            isCharPrev = 1;
+        } else if (isspace(ch) && isCharPrev) {
+            w++;
+            isCharPrev = 0;
+        } else if (ch == '\n') {
+            l++;
+            if (isCharPrev) {
+                w++;
+            }
+            isCharPrev = 0;
+        }
+    }
+    printf("  %d  %d %d %s\n", l, w, c, f_name);
+}
+
+double avg(int n, ...) {
+    double a = 0;
+    va_list l;
+    va_start(l, n);
+    for (int i = 0; i < n; i++) {
+        a += va_arg(l, int);
+    }
+    va_end(l);
+    a /= (float) n;
+    return a;
+}
 
 
 //=======================================TP4=================================================

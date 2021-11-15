@@ -4,7 +4,11 @@
 
 #include "../toolbox.h"
 
-void myWc(FILE *f, int *l, int *w, int *c) {
+void myWc(char *f_name, int *l, int *w, int *c) {
+    FILE *f = NULL;
+    f = fopen(f_name, "r");
+    checkFopen(f, f_name);
+
     *w = 0;
     *c = 0;
     *l = 0;
@@ -28,5 +32,5 @@ void myWc(FILE *f, int *l, int *w, int *c) {
             isCharPrev = 0;
         }
     }
-    printf("\n");
+    printf("  %d  %d %d %s\n", *l, *w, *c, f_name);
 }

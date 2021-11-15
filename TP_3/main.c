@@ -21,10 +21,8 @@ int main(int argc, char *argv[]) {
         //3)
         int w, c, l;
         str f_name = "shakey.txt";
-        FILE *f = fopen(f_name, "r");
-        checkFopen(f, f_name);
-        myWc(f, &l, &w, &c);
-        printf("  %d  %d %d %s\n", l, w, c, f_name);
+        myWc(f_name, &l, &w, &c);
+
         //4)
         printf("%f\n", avg(2, 5, 4));
         //// if there is a non-int in our params, the program compiles, and executes, but the behavior is erroneous

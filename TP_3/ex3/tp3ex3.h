@@ -13,6 +13,6 @@
  * @param c: a pointer to the number of characters
  */
 
-void myWc(FILE *f, int *l, int *w, int *c);
+void myWc(char *f_name, int *l, int *w, int *c);
 
 #endif //Y2_C_TP3EX3_H

@@ -47,6 +47,17 @@ typedef struct LList {
 
 #define BUFFER_SIZE 32768 //~4000 chars, 1000 ints, 500 long longs...
 
+#define MAX(A, B) ({ \
+                    typeof(A) _a = (A); \
+                    typeof(B) _b = (B); \
+                    _a > _b ? _a : _b;  \
+                    })
+
+//#define MAX(A, B) (A > B ? A : B)
+
+#define GET_INPUT_FILL_MAT_F  printf("row: %d | col: %d | >", i + 1, j + 1); \
+fgets(input, 20, stdin); x = strtof(input, &endptr); printf("%f\n", x);
+
 //=======================================TP1=================================================
 
 /**
@@ -238,8 +249,9 @@ void showList(List list);
 /**
  * checks if a file was open successfully; exits with error if not
  * @param f a pointer to the FILE
+ * @param f_name the name of the file
  */
-void checkFopen(FILE *f);
+void checkFopen(FILE *f, char *f_name);
 
 /**
  * copies an existing file's contents into another file, or appends an existing file's contents onto another file's
@@ -328,8 +340,40 @@ void writeListToFile(List l, char *txt_res_name);
  * @param txt_f_name the name of the given file
  * @param lPtr a pointer to the given List
  */
-void getListFromFile(char *txt_f_name, List *lPtr)
+void getListFromFile(char *txt_f_name, List *lPtr);
+
 //=======================================TP3=================================================
+
+/**
+ * prints an array of strings to the console
+ * @param arr
+ * @param n
+ */
+void showStrArr(char **arr, int n);
+
+/**
+ * finds all ints in a given string and extracts them into an array of... strings
+ * @param input the given string
+ * @param count a pointer to an int; the value that it points to will contain the size of the resulting array
+ * @return the array of strings that contains all the int values
+ */
+char **getIntsFromStr(char *input, int *count);
+
+/**
+ * imitates the behavior of 'wc' in shell: prints out the number of lines, of words, and of bytes / chars in a given
+ * file, followed by the file's name
+ * @param f_name the name of the file
+ */
+void myWc(char *f_name);
+
+/**
+ * calculates the average from any number of !!_ints_!!
+ * @param n the number of !!_ints_!! that will be submitted to this function (not including this _n_ parameter)
+ * @param ... any number of !!_ints_!!
+ * @return the average of the submitted !!_ints_!!
+ */
+double avg(int n, ...);
+
 
 //=======================================TP4=================================================
 
