@@ -386,7 +386,7 @@ int startVal_list(List list) {
 
 void showList(List list) {
     int n = listlen(list);
-    printf("list: {<x ");
+    printf("list: {<val_int ");
     Element *currentPtr = list.head_;
 
     for (int i = 0; i < n; i++) {
@@ -394,7 +394,7 @@ void showList(List list) {
         currentPtr = currentPtr->next_;
         if (i < n - 1) { printf(" <-> "); }
     }
-    printf(" x>}\n");
+    printf(" val_int>}\n");
 }
 
 //=======================================TP2=================================================
@@ -825,6 +825,36 @@ double avg(int n, ...) {
     return a;
 }
 
-
 //=======================================TP4=================================================
 
+void showIntCharAsBin(IntChar u) {
+    for (int i = 0; i < sizeof(int); i++) {
+        printf("(bin) byte %d: %c%c%c%c%c%c%c%c\n", i + 1, BYTE_TO_BIN(u.bytes[i]));
+    }
+}
+
+void showIntCharAsHexBytes(IntChar u) {
+    for (int i = 0; i < sizeof(int); i++) {
+        printf("(hex) byte %d: %02hhx\n", i + 1, u.bytes[i]);
+    }
+}
+
+int lessThan(int a, int b) {
+    if (a < b) { return 1; } else { return -1; }
+}
+
+int greaterThan(int a, int b) {
+    if (a > b) { return 1; } else { return -1; }
+}
+
+int isACompThanB(compPtr comp, int a, int b) {
+    if (a == b) { return 0; } else { return comp(a, b); }
+}
+
+int lessThanBis(const int *a, const int *b) {
+    if (*a < *b) { return 1; } else { return -1; }
+}
+
+int greaterThanBis(const int *a, const int *b) {
+    if (*a > *b) { return 1; } else { return -1; }
+}

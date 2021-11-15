@@ -58,6 +58,21 @@ typedef struct LList {
 #define GET_INPUT_FILL_MAT_F  printf("row: %d | col: %d | >", i + 1, j + 1); \
 fgets(input, 20, stdin); x = strtof(input, &endptr); printf("%f\n", x);
 
+#define BYTE_TO_BIN(byte)  \
+  ((byte) & 0x80 ? '1' : '0'), \
+  ((byte) & 0x40 ? '1' : '0'), \
+  ((byte) & 0x20 ? '1' : '0'), \
+  ((byte) & 0x10 ? '1' : '0'), \
+  ((byte) & 0x08 ? '1' : '0'), \
+  ((byte) & 0x04 ? '1' : '0'), \
+  ((byte) & 0x02 ? '1' : '0'), \
+  ((byte) & 0x01 ? '1' : '0')
+
+typedef union IntChar {
+    int val_int;
+    char bytes[4];
+} IntChar;
+
 //=======================================TP1=================================================
 
 /**
@@ -374,7 +389,59 @@ void myWc(char *f_name);
  */
 double avg(int n, ...);
 
-
 //=======================================TP4=================================================
+
+/**
+ * prints an integer to the console as a binary number, and shows the order of the bytes
+ * @param u
+ */
+void showIntChar_bin(IntChar u);
+
+/**
+ * prints an integer to the console as a hex number, and shows the order of the bytes
+ * @param u
+ */
+void showIntCharAsHexBytes(IntChar u);
+
+/**
+ * compares two ints for inferiority
+ * @param a one int to be compared
+ * @param b the other int to be compared
+ * @return 1 if a is inferior, -1 if not
+ */
+int lessThan(int a, int b);
+
+/**
+ * compares two ints for superiority
+ * @param a one int to be compared
+ * @param b the other int to be compared
+ * @return 1 if a is superior, -1 if not
+ */
+int greaterThan(int a, int b);
+
+/**
+ * makes use of a function pointer to compare two ints
+ * @param comp the pointer to a comparison function, such as lessThan() and greaterThan()
+ * @param a one int to be compared
+ * @param b the other int to be compared
+ * @return 0 if they are equal, else returns whatever the function pointed to would return
+ */
+int isACompThanB(compPtr comp, int a, int b);
+
+/**
+ * compares two ints for inferiority, using pointers for qsort() compatibility
+ * @param a a one int to be compared
+ * @param b b the other int to be compared
+ * @return 1 if a is inferior, -1 if not
+ */
+int lessThanBis(const int *a, const int *b);
+
+/**
+ * compares two ints for superiority, using pointers for qsort() compatibility
+ * @param a a one int to be compared
+ * @param b b the other int to be compared
+ * @return 1 if a is superior, -1 if not
+ */
+int greaterThanBis(const int *a, const int *b);
 
 #endif //Y2_C_TOOLBOX_H
