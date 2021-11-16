@@ -7,7 +7,7 @@
 
 #define GET_INPUT  printf("row: %d | col: %d | >", i + 1, j + 1); fgets(input, 15, stdin); x = strtof(input, &endptr); printf("%f\n", x);
 
-void fillMat_f(float **mat, int rows, int cols) {
+void fillFloatMat(float **mat, int rows, int cols) {
     if (rows > 0 && cols > 0 && mat != NULL) {
         printf("Please select floats as coefficients for this matrix (rows = %d, columns = %d)\n"
                "_(!)_(Please use '.' instead of ',' with floats, or they WILL be trunked)\n", rows, cols);

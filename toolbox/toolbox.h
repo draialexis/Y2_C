@@ -99,10 +99,17 @@ int *mkIntArr(int n);
 
 /**
  * prints an array of ints to the console
- * @param T the array
+ * @param arr the array
  * @param n the size of the array
  */
-void showIntArr(int *T, int n);
+void showIntArr(int *arr, int n);
+
+/**
+ * prints an array of floats to the console
+ * @param arr the array
+ * @param n the size of the array
+ */
+void showFloatArr(float *arr, int n);
 
 /**
  * fills an array of ints with random values in a range
@@ -168,7 +175,7 @@ char *mkStrPerm(const char *orig, const int *arr, int n);
  * @param rows the size of the outer array
  * @param cols the size of the inner arrays
  */
-void showMat_f(float **mat, int rows, int cols);
+void showFloatMat(float **mat, int rows, int cols);
 
 /**
  * allocates memory for an empty 2D array of floats, and for the inner arrays
@@ -176,7 +183,15 @@ void showMat_f(float **mat, int rows, int cols);
  * @param cols the size of the inner arrays
  * @return a pointer to the 2D array of floats
  */
-float **mkMat_f(int rows, int cols);
+float **mkFloatMat(int rows, int cols);
+
+/**
+ * allocates memory for an empty 2D array of int, and for the inner arrays
+ * @param rows the size of the outer array
+ * @param cols the size of the inner arrays
+ * @return a pointer to the 2D array of ints
+ */
+int **mkIntMat(int rows, int cols);
 
 /**
  * fills a 2D array of floats, as a matrix, using console input
@@ -184,7 +199,7 @@ float **mkMat_f(int rows, int cols);
  * @param rows the size of the outer array
  * @param cols the size of the inner arrays
  */
-void fillMat_f(float **mat, int rows, int cols);
+void fillFloatMat(float **mat, int rows, int cols);
 
 /**
  * makes a 2D array of floats, as a matrix, that is a right-rotation of a given matrix
@@ -193,15 +208,21 @@ void fillMat_f(float **mat, int rows, int cols);
  * @param mcols the original size of the inner arrays
  * @return a pointer to a new 2D array of floats that is a right-rotation of the given matrix
  */
-float **rotateRightMat_f(float **mat, int mrows, int mcols);
+float **rotateFloatMatRight(float **mat, int mrows, int mcols);
 
 /**
  * frees the allocated memory of a 2D array of floats
  * @param mat the 2D array of floats to be freed
  * @param rows the size of the outer array
- * @param cols the size of the inner arrays
  */
-void freeMat_f(float **mat, int rows, int cols);
+void freeFloatMat(float **mat, int rows);
+
+/**
+ * frees the allocated memory of a 2D array of ints
+ * @param mat the 2D array of ints to be freed
+ * @param rows the size of the outer array
+ */
+void freeIntMat(int **mat, int rows);
 
 /**
  * makes a 2D array of ints that represents Pascal's Triangle, and prints it to the console

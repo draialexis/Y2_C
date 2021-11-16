@@ -5,7 +5,7 @@
 #ifndef Y2_C_TP1EX8_H
 #define Y2_C_TP1EX8_H
 
-void showMat_f(float **mat, int rows, int cols) {
+void showFloatMat(float **mat, int rows, int cols) {
     if (rows > 0 && cols > 0 && mat != NULL) {
         printf("matrix:\n");
         for (int i = 0; i < rows; i++) {

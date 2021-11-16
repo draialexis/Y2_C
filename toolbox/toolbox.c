@@ -34,7 +34,7 @@ char *mkStr(int n) {
 }
 
 int *mkIntArr(int n) {
-    if (n < 1) {
+    if (n < 0) {
         EMPTY_OR_NULL
         return NULL;
     }
@@ -47,12 +47,29 @@ int *mkIntArr(int n) {
     return res;
 }
 
-void showIntArr(int *T, int n) {
-    if (T == NULL || n < 1) { EMPTY_OR_NULL }
+void showIntArr(int *arr, int n) {
+    if (arr == NULL || n < 0) {
+        EMPTY_OR_NULL
+        FAIL_OUT
+    }
 
     printf("[");
     for (int i = 0; i < n; i++) {
-        printf("%d", T[i]);
+        printf("%d", arr[i]);
+        if (i < n - 1) { printf(", "); }
+    }
+    printf("]\n");
+}
+
+void showFloatArr(float *arr, int n) {
+    if (arr == NULL || n < 0) {
+        EMPTY_OR_NULL
+        FAIL_OUT
+    }
+
+    printf("[");
+    for (int i = 0; i < n; i++) {
+        printf("%f", arr[i]);
         if (i < n - 1) { printf(", "); }
     }
     printf("]\n");
@@ -190,7 +207,7 @@ char *mkStrPerm(const char *orig, const int *arr, int n) {
     return res;
 }
 
-void showMat_f(float **mat, int rows, int cols) {
+void showFloatMat(float **mat, int rows, int cols) {
     if (rows < 1 || cols < 1 || mat == NULL) { EMPTY_OR_NULL }
 
     for (int i = 0; i < rows; i++) {
@@ -202,7 +219,7 @@ void showMat_f(float **mat, int rows, int cols) {
     }
 }
 
-float **mkMat_f(int rows, int cols) {
+float **mkFloatMat(int rows, int cols) {
     if (rows < 1 || cols < 1) {
         EMPTY_OR_NULL
         FAIL_OUT
@@ -220,14 +237,39 @@ float **mkMat_f(int rows, int cols) {
     }
 
     if (hasFailed) {
-        freeMat_f(mat, rows, cols);
+        freeFloatMat(mat, rows);
         MALLOC_FAIL
     } else {
         return mat;
     }
 }
 
-void fillMat_f(float **mat, int rows, int cols) {
+int **mkIntMat(int rows, int cols) {
+    if (rows < 1 || cols < 1) {
+        EMPTY_OR_NULL
+        FAIL_OUT
+    }
+
+    int **mat = NULL;
+    mat = malloc(sizeof(int *) * rows);
+    if (mat == NULL) { MALLOC_FAIL }
+
+    int hasFailed = 0;
+    for (int i = 0; i < rows; i++) {
+        mat[i] = NULL;
+        mat[i] = malloc(sizeof(int) * cols);
+        if (mat[i] == NULL) { hasFailed = 1; }
+    }
+
+    if (hasFailed) {
+        freeIntMat(mat, rows);
+        MALLOC_FAIL
+    } else {
+        return mat;
+    }
+}
+
+void fillFloatMat(float **mat, int rows, int cols) {
     if (rows < 1 || cols < 1 || mat == NULL) {
         EMPTY_OR_NULL
         FAIL_OUT
@@ -248,7 +290,7 @@ void fillMat_f(float **mat, int rows, int cols) {
     }
 }
 
-float **rotateRightMat_f(float **mat, int mrows, int mcols) {
+float **rotateFloatMatRight(float **mat, int mrows, int mcols) {
     if (mrows < 1 || mcols < 1 || mat == NULL) {
         EMPTY_OR_NULL
         return NULL;
@@ -256,7 +298,7 @@ float **rotateRightMat_f(float **mat, int mrows, int mcols) {
 
     int cols = mrows;
     int rows = mcols;
-    float **res = mkMat_f(rows, cols);
+    float **res = mkFloatMat(rows, cols);
 
     for (int i = 0; i < rows; i++) {
         for (int j = cols - 1; j >= 0; j--) {
@@ -266,8 +308,18 @@ float **rotateRightMat_f(float **mat, int mrows, int mcols) {
     return res;
 }
 
-void freeMat_f(float **mat, int rows, int cols) {
-    if (rows < 1 || cols < 1 || mat == NULL) {
+void freeFloatMat(float **mat, int rows) {
+    if (rows < 1 || mat == NULL) {
+        EMPTY_OR_NULL
+    }
+    for (int i = 0; i < rows; i++) {
+        if (mat[i] != NULL) { free(mat[i]); }
+    }
+    free(mat);
+}
+
+void freeIntMat(int **mat, int rows) {
+    if (rows < 1 || mat == NULL) {
         EMPTY_OR_NULL
     }
     for (int i = 0; i < rows; i++) {
