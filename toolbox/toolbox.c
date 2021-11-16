@@ -730,6 +730,51 @@ void getListFromFile(char *txt_f_name, List *lPtr) {
     fclose(f);
 }
 
+float **getFloatsFromFile(char *txt_f_name, int *rows, int *cols) {
+    FILE *f = NULL;
+    f = fopen(txt_f_name, "r");
+    checkFopen(f, txt_f_name);
+    char c;
+
+    int isFirstLine = 1;
+    *rows = 1;
+    *cols = 1;
+    while (!feof(f)) {
+        c = (char) fgetc(f);
+        if (c == '\n') {
+            *rows += 1;
+            if (isFirstLine) { isFirstLine = 0; }
+        } else if (c == ' ' && isFirstLine) {
+            *cols += 1;
+        }
+    }
+
+    fseek(f, 0, SEEK_SET);
+
+    char *tmp = mkStr(1);
+    char *str = mkStr(BUFFER_SIZE);
+
+    while (!feof(f)) {
+        c = (char) fgetc(f);
+        sprintf(tmp, "%c", c);
+        strcat(str, tmp);
+    }
+
+    char *endPtr;
+    float **res = mkFloatMat(*rows, *cols);
+    for (int i = 0; i < *rows; i++) {
+        for (int j = 0; j < *cols; j++) {
+            res[i][j] = strtof(str, &endPtr);
+            strcpy(str, endPtr);
+        }
+    }
+
+    printf("\n");
+    fclose(f);
+    return res;
+}
+
+
 //=======================================TP3=================================================
 
 char **getIntsFromStr(char *input, int *count) {

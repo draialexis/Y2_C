@@ -378,6 +378,15 @@ void writeListToFile(List l, char *txt_res_name);
  */
 void getListFromFile(char *txt_f_name, List *lPtr);
 
+/**
+ * creates a matrix or array of floats based on the contents (presumably, floats) of a txt file
+ * @param txt_f_name the name of the given file
+ * @param rows a pointer for holding the size of the returned array
+ * @param cols a pointer for holding the size of the returned array
+ * @return the matrix or array created
+ */
+float **getFloatsFromFile(char *txt_f_name, int *rows, int *cols);
+
 //=======================================TP3=================================================
 
 /**
